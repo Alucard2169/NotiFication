@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import Navbar from "./Navbar";
+import Auth from "./Auth";
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,7 +9,8 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
       <div className="bg-MAIN w-screen h-screen">
-        <Navbar/>
+          <Auth/>
+          <Navbar />
       {children}
     </div>
   );
