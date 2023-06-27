@@ -1,18 +1,27 @@
-import { FC, useState } from "react";
-import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
+import { authContext, AuthContextProps} from "@/context/AuthContext";
+import { FC, useState, useContext } from "react";
+import {AiFillCloseCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 
 const Auth: FC = () => {
+  const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
+  const { state, setState } = contextValue;
 
-    const [togglePassword, setTogglePassword] = useState(false)
+  const [togglePassword, setTogglePassword] = useState<boolean>(false);
+
+  const handleTogglePassword = ():void => {
+    setTogglePassword(!togglePassword);
+    };
     
-    const handleTogglePassword = () => {
-        setTogglePassword(!togglePassword)
+
+    const handleAuthFormVisibility = ():void => {
+        setState(false)
     }
 
 
     return ( 
-        <div className={`fixed  bg-black w-screen h-screen z-100 opacity-70 flex justify-center items-center`}>
+        <div className={`fixed  bg-black w-screen h-screen z-100 opacity-70 flex justify-center items-center ${!state ? "hidden" : null}`}>
+            <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/4 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
             <form className="flex flex-col gap-8 items-center w-1/4">
                 <div className="flex flex-col gap-4 w-full">
                     <label htmlFor="username" className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm">
@@ -37,6 +46,9 @@ const Auth: FC = () => {
 
                 <input type="submit" value='SUBMIT' className="rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer"/>
             </form>
+
+
+            
         </div>
      );
 }

@@ -1,14 +1,22 @@
+import { authContext, AuthContextProps } from "@/context/AuthContext";
 import Image from "next/image";
 import pfp from '@/public/1.jpg'
-import { useState } from "react";
+import { useState ,useContext} from "react";
 
 const Navbar = () => {
 
-    const [select, setSelect] = useState(true);
+const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
+  const { setState } = contextValue;
 
 
-    const handleSelect = () => {
+    const [select, setSelect] = useState<boolean>(true);
+
+    const handleSelect = ():void => {
         setSelect(!select)
+    }
+
+    const handleAuthFormVisibility = ():void => {
+        setState(true)
     }
 
     return ( 
@@ -19,8 +27,7 @@ const Navbar = () => {
             </ul>
  
                 <ul className="flex gap-8 items-center">
-                    <li className="px-2 py-1 text-white bg-COMPONENT_PRIMARY_BG text-MAIN font-semibold rounded-lg cursor-pointer">Login</li>
-                    <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">SignUp</li>
+                    <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer" onClick={handleAuthFormVisibility} >Sign-In</li>
                     <Image alt="userPfp" className="rounded-full w-10 h-10 object-cover" width={50} height={70} src={pfp} />
                 </ul>
          
