@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* utility Classes */
+
+.custom-list{
+  color: #1E1E24;
+  background-color: #E54B4B;
+  padding-inline: 1rem;
+  padding-block: .25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.custom-list-N{
+    color: #F7EBE8;
+border: 1px #E54B4B solid;
+  padding-inline: 1rem;
+  padding-block: .25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
