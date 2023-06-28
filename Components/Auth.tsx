@@ -8,7 +8,7 @@ const Auth: FC = () => {
   const { state, setState } = contextValue;
 
     const [togglePassword, setTogglePassword] = useState<boolean>(false);
-const [formContent, setFormContent] = useState<string>('login');
+    const [formContent, setFormContent] = useState<string>('login');
 
    const handleFormContent = (): void => {
   setFormContent((prevFormContent) => (prevFormContent === 'login' ? 'sign' : 'login'));
@@ -27,8 +27,8 @@ const [formContent, setFormContent] = useState<string>('login');
 
     return ( 
         <div className={`fixed  bg-black w-screen h-screen z-100 opacity-70 flex justify-center items-center ${!state ? "hidden" : null}`}>
-            <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/4 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
-            <form className="flex flex-col gap-8 items-center w-1/4 ">
+            <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
+            <form className="flex flex-col gap-8 items-center w-1/4 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg">
                 <div className="flex flex-col gap-4 w-full">
                     <label htmlFor="username" className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm">
                     Username

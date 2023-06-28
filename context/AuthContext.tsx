@@ -12,7 +12,7 @@ interface AuthContextProviderProps {
 }
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [state, setState] = useState<boolean>(true);
+  const [state, setState] = useState<boolean>(false);
 
   const contextValue: AuthContextProps = {
     state: state,

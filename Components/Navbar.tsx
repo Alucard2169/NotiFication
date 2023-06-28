@@ -9,10 +9,10 @@ const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
   const { setState } = contextValue;
 
 
-    const [select, setSelect] = useState<boolean>(true);
+    const [select, setSelect] = useState<string>('tech');
 
-    const handleSelect = ():void => {
-        setSelect(!select)
+    const handleSelect = (prop:string):void => {
+        setSelect(prop)
     }
 
     const handleAuthFormVisibility = ():void => {
@@ -22,8 +22,8 @@ const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
     return ( 
         <nav className="w-screen px-8 py-2 flex justify-between items-center bg-PRIMARY">
             <ul className="flex gap-4 items-center">
-                <li className={`${select ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={handleSelect}>Tech</li>
-                <li className={`${!select ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={handleSelect}>Projects</li>
+                <li className={`${select==='tech' ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={()=>handleSelect('tech')}>Tech</li>
+                <li className={`${select!=='tech' ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={()=>handleSelect('project')}>Projects</li>
             </ul>
  
                 <ul className="flex gap-8 items-center">

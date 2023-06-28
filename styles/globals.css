@@ -34,3 +34,67 @@ border: 1px #E54B4B solid;
   font-size: 1.2rem;
   cursor: pointer;
 }
+
+
+.scroll-list{
+      display: grid;
+    grid-template-columns: repeat(31,20rem);
+    gap: 2rem;
+    overflow-x: scroll; 
+    overflow-y: hidden;  
+    width:90%;
+    scrollbar-width: thin;
+    scroll-behavior:smooth;
+    margin:auto;
+}
+
+.scroll-list/* Add this CSS to your stylesheets or style tag */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scroll-list::-webkit-scrollbar-track {
+  background-color: #E54B4B; /* Background color of the scrollbar track */
+}
+
+.scroll-list::-webkit-scrollbar-thumb {
+  background-color: #E54B4B; /* Color of the scrollbar thumb */
+}
+
+.scroll-list::-webkit-scrollbar-thumb:hover {
+  background-color: #E54B4B; /* Color of the scrollbar thumb on hover */
+}
+
+
+/* Add this CSS to your stylesheets or style tag */
+/* For Firefox */
+/* Track */
+.scroll-list::-moz-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  background-color: #E54B4B; /* Background color of the scrollbar track */
+}
+
+/* Thumb */
+.scroll-list::-moz-scrollbar-thumb {
+  background-color: #E54B4B; /* Color of the scrollbar thumb */
+}
+
+/* Thumb on hover */
+.scroll-list::-moz-scrollbar-thumb:hover {
+  background-color: #E54B4B; /* Color of the scrollbar thumb on hover */
+}
+
+
+.navIcon{
+  position: absolute;
+  margin-right: 95%;
+  font-size: 2rem;
+  color: white;
+}
+
+.navIconRight{
+    position: absolute;
+  margin-left:95%;
+  font-size: 2rem;
+  color: white;
+}

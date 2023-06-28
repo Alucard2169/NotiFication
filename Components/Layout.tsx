@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-      <div className="bg-MAIN w-screen h-screen">
+      <div className="bg-MAIN w-screen h-screen overflow-x-hidden">
           <Auth/>
           <Navbar />
       {children}
