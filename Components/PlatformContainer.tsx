@@ -19,13 +19,13 @@ const PlatformContainer: FC<PlatformContainerProps> = ({ data }) => {
 
   const handleLeftScroll = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft -= 400;
+      scrollRef.current.scrollLeft -= 500;
     }
   };
 
   const handleRightScroll = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft += 400;
+      scrollRef.current.scrollLeft += 500;
     }
   };
 
@@ -35,13 +35,13 @@ const PlatformContainer: FC<PlatformContainerProps> = ({ data }) => {
       <div className="scroll-list" ref={scrollRef}>
         {data.map((platform: PlatformData) => (
           <div key={platform.name} style={{ backgroundColor: platform.color }} className="p-2 rounded-md flex flex-col gap-4">
-            <h4 className="bg-MAIN rounded-md text-center text-white font-bold px-2 w-fit">{platform.name}</h4>
+            <h4 className="bg-MAIN rounded-md text-center text-white font-bold px-2 py-1 w-fit">{platform.name}</h4>
             <div className='bg-COMPONENT_BG rounded-md p-2 flex flex-col gap-4'>
-              <p className='text-MAIN font-semibold'>Project Count: <span className='text-PRIMARY font-bold'>{platform.project_count}</span></p>
-                    <ul className='flex gap-2 items-center'>
-                        {platform.homepage && <li><a href={`${platform.homepage}`} target='_blank'><BsGlobe className='text-blue-500 text-2xl'/></a></li>}
-                        {platform.default_language && <li className='text-MAIN font-semibold'>{platform.default_language}</li>}
-                </ul>
+              <p className='text-MAIN font-semibold'>Project Count: <span className='text-white bg-PRIMARY p-1 rounded-md font-bold'>{platform.project_count}</span></p>
+                    
+                      <p className='text-MAIN font-semibold'>Language: {platform.default_language || 'N/A'}</p>
+                        {platform.homepage && <p className='bg-MAIN w-fit p-1 rounded-md'><a href={`${platform.homepage}`} target='_blank'><BsGlobe className='text-blue-500 text-2xl'/></a></p>}
+                
                 </div>
           </div>
         ))}

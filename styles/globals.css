@@ -46,15 +46,16 @@ border: 1px #E54B4B solid;
     scrollbar-width: thin;
     scroll-behavior:smooth;
     margin:auto;
+    scrollbar-color: #E54B4B #1E1E24;
 }
 
-.scroll-list/* Add this CSS to your stylesheets or style tag */
-::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+.scroll-list::-webkit-scrollbar {
+  scroll-margin-block-start: 1rem;
+  height: 5px;
 }
 
 .scroll-list::-webkit-scrollbar-track {
-  background-color: #E54B4B; /* Background color of the scrollbar track */
+  background-color: #1E1E24; /* Background color of the scrollbar track */
 }
 
 .scroll-list::-webkit-scrollbar-thumb {
@@ -62,27 +63,26 @@ border: 1px #E54B4B solid;
 }
 
 .scroll-list::-webkit-scrollbar-thumb:hover {
-  background-color: #E54B4B; /* Color of the scrollbar thumb on hover */
+  background-color: #F7EBE8; /* Color of the scrollbar thumb on hover */
 }
 
+.scroll-list {
 
-/* Add this CSS to your stylesheets or style tag */
-/* For Firefox */
-/* Track */
-.scroll-list::-moz-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-  background-color: #E54B4B; /* Background color of the scrollbar track */
+  scrollbar-width: thin; /* Width of the scrollbar */
 }
 
-/* Thumb */
 .scroll-list::-moz-scrollbar-thumb {
   background-color: #E54B4B; /* Color of the scrollbar thumb */
 }
 
-/* Thumb on hover */
 .scroll-list::-moz-scrollbar-thumb:hover {
-  background-color: #E54B4B; /* Color of the scrollbar thumb on hover */
+  background-color: #F7EBE8; /* Color of the scrollbar thumb on hover */
 }
+
+.scroll-list::-moz-scrollbar-track {
+  background-color: #F7EBE8; /* Background color of the scrollbar track */
+}
+
 
 
 .navIcon{
