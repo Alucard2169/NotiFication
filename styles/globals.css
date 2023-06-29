@@ -87,13 +87,16 @@ border: 1px #E54B4B solid;
 
 .navIcon{
   position: absolute;
+  cursor: pointer;
   margin-right: 95%;
   font-size: 2rem;
   color: white;
 }
 
 .navIconRight{
+
     position: absolute;
+    cursor: pointer;
   margin-left:95%;
   font-size: 2rem;
   color: white;

@@ -29,15 +29,19 @@ const PlatformContainer: FC<PlatformContainerProps> = ({ data }) => {
     }
   };
 
+    const  addCommasToNumber = (number: number): string => {
+  return number.toLocaleString();
+}
+
   return (
-    <div className='flex flex-col gap-8 items-center justify-center h-fit'>
+    <div className='relative flex flex-col gap-8 items-center justify-center h-fit'>
       <AiFillCaretLeft onClick={handleLeftScroll} className='navIcon'/>
       <div className="scroll-list" ref={scrollRef}>
         {data.map((platform: PlatformData) => (
           <div key={platform.name} style={{ backgroundColor: platform.color }} className="p-2 rounded-md flex flex-col gap-4">
             <h4 className="bg-MAIN rounded-md text-center text-white font-bold px-2 py-1 w-fit">{platform.name}</h4>
             <div className='bg-COMPONENT_BG rounded-md p-2 flex flex-col gap-4'>
-              <p className='text-MAIN font-semibold'>Project Count: <span className='text-white bg-PRIMARY p-1 rounded-md font-bold'>{platform.project_count}</span></p>
+              <p className='text-MAIN font-semibold'>Project Count: <span className='text-white bg-PRIMARY p-1 rounded-md font-bold'>{addCommasToNumber(platform.project_count)}</span></p>
                     
                       <p className='text-MAIN font-semibold'>Language: {platform.default_language || 'N/A'}</p>
                         {platform.homepage && <p className='bg-MAIN w-fit p-1 rounded-md'><a href={`${platform.homepage}`} target='_blank'><BsGlobe className='text-blue-500 text-2xl'/></a></p>}

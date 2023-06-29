@@ -2,6 +2,7 @@ import { authContext, AuthContextProps } from "@/context/AuthContext";
 import Image from "next/image";
 import pfp from '@/public/1.jpg'
 import { useState ,useContext} from "react";
+import Link from "next/link";
 
 const Navbar = () => {
 
@@ -22,7 +23,7 @@ const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
     return ( 
         <nav className="w-screen px-8 py-2 flex justify-between items-center bg-PRIMARY">
             <ul className="flex gap-4 items-center">
-                <li className={`${select==='tech' ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={()=>handleSelect('tech')}>Tech</li>
+                <li className={`${select==='tech' ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={()=>handleSelect('tech')}><Link href='/tech'>Tech</Link></li>
                 <li className={`${select!=='tech' ? 'custom-list':'custom-list-N'} transition-all duration-200`} onClick={()=>handleSelect('project')}>Projects</li>
             </ul>
  
