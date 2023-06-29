@@ -21,12 +21,13 @@ const Auth: FC = () => {
     
 
     const handleAuthFormVisibility = ():void => {
-        setState(false)
+      setState(false)
+      setFormContent('login')
     }
 
 
     return ( 
-        <div className={`fixed  bg-black w-screen h-screen z-100 opacity-70 flex justify-center items-center ${!state ? "hidden" : null}`}>
+        <div className={`fixed  bg-black w-screen h-screen z-100 flex justify-center items-center ${!state ? "hidden" : null}`}>
             <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
             <form className="flex flex-col gap-8 items-center w-1/4 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg">
                 <div className="flex flex-col gap-4 w-full">
