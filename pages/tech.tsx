@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import {FiSearch} from 'react-icons/fi'
+
 import PlatformContainer from '@/Components/PlatformContainer'
 import PreviewTech from '@/Components/PreviewTech'
 
@@ -61,12 +61,6 @@ const Tech:FC<homeProps> = ({platformData,techResult}) => {
 
   return (
     <div className='bg-MAIN flex flex-col gap-8 p-4 w-screen'>
-      <form className='flex items-baseline gap-4'>
-        <label htmlFor="search" className='relative'>
-          <FiSearch className='absolute left-2 top-1/3 text-white font-bold'/>
-        <input type="text" id='search'className='rounded-full py-2 pl-10 pr-4 text-md focus:outline-COMPONENT_BG focus:bg-MAIN focus:text-COMPONENT_BG bg-COMPONENT_BG text-MAIN font-semibold outline-none placeholder:text-MAIN transition-all duration-200' placeholder='ex: NPM or ReactJS'/>
-        </label>
-      </form>
       <div className='flex flex-col gap-8'>
         <h3 className='text-white text-xl font-bold'>Available Package Managers <span className='text-COMPONENT_BG text-md'>{platformData.length}</span></h3>
       <PlatformContainer data={platformData}/>
