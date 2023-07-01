@@ -1,17 +1,22 @@
-import { authContext, AuthContextProps} from "@/context/AuthContext";
+import { authContext, AuthContextProps } from "@/context/AuthContext";
+import Image from "next/image";
 import { FC, useState, useContext } from "react";
+import { useRouter } from "next/router";
+import loadingGIF from '@/public/loading.gif'
 import {AiFillCloseCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 
 const Auth: FC = () => {
-  const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
-  const { state, setState } = contextValue;
+  const router = useRouter()
+  const contextValue = useContext(authContext) as AuthContextProps;
+  const { state, setState,loadingState,setLoadingState } = contextValue;
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>('login');
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [email, setEmail] = useState<string>('')
-  const [error,setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
    
 
    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,9 +61,9 @@ const handleTogglePassword = ():void => {
 
       if (response.ok) {
         const data = await response.json();
-
-        console.log(data)
         setError(null)
+        router.push('/tech')
+        setLoadingState(true)
       } else {
         // Handle login error
         const errorData = await response.json();
@@ -70,9 +75,17 @@ const handleTogglePassword = ():void => {
     }
   };
 
+
     return ( 
         <div className={`fixed  bg-black w-screen h-screen z-100 flex justify-center items-center ${!state ? "hidden" : null}`}>
-            <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
+        {loadingState ?
+          <div className="text-center flex flex-col gap-8">
+            <Image src={loadingGIF} alt="loading animation" width={400} height={200} />
+            <p className="text-white font-bold">Loading...</p>
+         </div>
+          : 
+          <>
+                <AiFillCloseCircle className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white" onClick={handleAuthFormVisibility}/>
         <form className="flex flex-col gap-8 items-center w-1/4 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg" onSubmit={(e) => { formContent === 'sign' ? handleSignUp(e) : null }}>
           {error && <p className="rounded-full py-1 bg-red-700 w-full text-center text-white font-semibold">{error}</p>}
                 <div className="flex flex-col gap-4 w-full">
@@ -120,6 +133,7 @@ const handleTogglePassword = ():void => {
 
 
        
+          </>}
         </div>
      );
 }

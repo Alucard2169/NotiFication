@@ -1,5 +1,5 @@
-import { FC } from 'react'
-
+import { FC ,useContext,useEffect} from 'react'
+import { authContext, AuthContextProps } from "@/context/AuthContext";
 import PlatformContainer from '@/Components/PlatformContainer'
 import PreviewTech from '@/Components/PreviewTech'
 
@@ -57,7 +57,13 @@ interface homeProps {
 }
 
 const Tech:FC<homeProps> = ({platformData,techResult}) => {
-
+    const contextValue = useContext(authContext) as AuthContextProps;
+  const { setState, setLoadingState } = contextValue;
+  
+  useEffect(() => {
+    setState(false)
+    setLoadingState(false)
+  },[])
 
   return (
     <div className='bg-MAIN flex flex-col gap-8 p-4 w-screen'>
@@ -82,18 +88,16 @@ export async function getServerSideProps() {
 
     const [platformResponse, reactResponse] = await Promise.all([
       fetch(`${apiBaseUrl}/platforms?api_key=${apiKey}`).then(response => response.json()),
-      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}`).then(response => response.json()),
+      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}&per_page=9`).then(response => response.json()),
     ]);
 
     const platformData = platformResponse;
-    const rawTechData = reactResponse.slice(0,9)
-    const techResult = rawTechData ;
+    const techResult = reactResponse;
 
     return {
       props: {
         platformData,
         techResult
-        // Add any server-side data you want to pass as props
       }
     };
   } catch (err) {
