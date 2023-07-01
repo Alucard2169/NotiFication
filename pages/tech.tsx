@@ -81,14 +81,17 @@ const Tech:FC<homeProps> = ({platformData,techResult}) => {
 
 export default Tech;
 
-export async function getServerSideProps() {
+
+
+
+export async function getStaticProps() {
   try {
     const apiBaseUrl = 'https://libraries.io/api';
     const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
 
     const [platformResponse, reactResponse] = await Promise.all([
-      fetch(`${apiBaseUrl}/platforms?api_key=${apiKey}`).then(response => response.json()),
-      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}&per_page=9`).then(response => response.json()),
+      fetch(`${apiBaseUrl}/platforms?api_key=${apiKey}&per_page=10`).then(response => response.json()),
+      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}&per_page=6`).then(response => response.json()),
     ]);
 
     const platformData = platformResponse;
@@ -97,13 +100,15 @@ export async function getServerSideProps() {
     return {
       props: {
         platformData,
-        techResult
-      }
+        techResult,
+      },
+      // Re-generate the page at most once every 24 hours (adjust the duration as needed)
+      revalidate: 86400,
     };
   } catch (err) {
     console.log(err);
     return {
-      props: {}
+      props: {},
     };
   }
 }

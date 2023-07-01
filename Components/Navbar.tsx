@@ -39,7 +39,7 @@ const Navbar: FC = () => {
         </label>
       </form>
                 <ul className="flex gap-8 items-center">
-                    <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"  >Logout</li>
+                    <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"  ><Link href="/">Logout</Link></li>
                     <Image alt="userPfp" className="rounded-full w-10 h-10 object-cover" width={50} height={70} src={pfp} />
                 </ul>
          

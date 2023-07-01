@@ -1,5 +1,6 @@
 import { FC,useContext } from 'react';
 import { authContext, AuthContextProps } from "@/context/AuthContext";
+import Link from 'next/link';
 
 const Home: FC = () => {
   const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
@@ -28,6 +29,7 @@ const Home: FC = () => {
         </button>
         to get started
       </p>
+
     </div>
   );
 };
