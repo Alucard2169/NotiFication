@@ -57,13 +57,8 @@ interface homeProps {
 }
 
 const Tech:FC<homeProps> = ({platformData,techResult}) => {
-    const contextValue = useContext(authContext) as AuthContextProps;
-  const { setState, setLoadingState } = contextValue;
+
   
-  useEffect(() => {
-    setState(false)
-    setLoadingState(false)
-  },[])
 
   return (
     <div className='bg-MAIN flex flex-col gap-8 p-4 w-screen'>

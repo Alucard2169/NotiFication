@@ -4,12 +4,17 @@ import { FC, useState, useContext } from "react";
 import { useRouter } from "next/router";
 
 import {AiFillCloseCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { userContext, UserContextProps } from "@/context/UserContext";
 
 
 const Auth: FC = () => {
   const router = useRouter()
   const contextValue = useContext(authContext) as AuthContextProps;
   const { state, setState } = contextValue;
+  const userContextValue = useContext(userContext) as UserContextProps;
+  const { setData } = userContextValue;
+
+
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>('login');
   const [username, setUsername] = useState<string>('')
@@ -17,7 +22,14 @@ const Auth: FC = () => {
   const [email, setEmail] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
 
-   
+    const resetForm = () => {
+    setError(null)
+    setUsername('')
+    setPassword('');
+    setEmail('');
+    setState(false)
+    setFormContent('login')
+  }
 
    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -61,7 +73,8 @@ const handleTogglePassword = ():void => {
 
       if (response.ok) {
         const data = await response.json();
-        setError(null)
+        setData(data)
+        resetForm()
         router.push('/tech')
     
       } else {
@@ -74,6 +87,9 @@ const handleTogglePassword = ():void => {
       console.error('An error occurred during login:', error);
     }
   };
+
+
+ 
 
 
     return ( 
