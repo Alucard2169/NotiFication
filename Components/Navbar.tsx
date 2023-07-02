@@ -25,6 +25,15 @@ const Navbar: FC = () => {
   // Check if the current route is "/tech"
   const isTechPage = router.pathname === "/tech";
 
+
+
+const handleLogout = async () => {
+  const response = await fetch('/api/logout');
+
+    router.replace('/');
+  };
+
+
   return (
     <nav className="w-screen px-8 py-2 flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
@@ -67,8 +76,8 @@ const Navbar: FC = () => {
         </label>
       </form>
       <ul className="flex gap-8 items-center">
-        <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">
-          <Link href="/">Logout</Link>
+        <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer" onClick={handleLogout}>
+          Logout
         </li>
         <Image
           alt="userPfp"
