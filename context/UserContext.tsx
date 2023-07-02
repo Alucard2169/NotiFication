@@ -1,4 +1,5 @@
-import React, { FC, createContext, ReactNode, useState, SetStateAction, Dispatch } from 'react';
+import { useRouter } from 'next/router';
+import React, { FC, createContext, ReactNode, useState, SetStateAction, Dispatch, useEffect } from 'react';
 
 interface StateProps {
   user_id: number;
@@ -18,6 +19,7 @@ interface Props {
 export const userContext = createContext<UserContextProps | null>(null);
 
 const UserContextProvider: FC<Props> = ({ children }) => {
+  const router = useRouter();
   const [data, setData] = useState<StateProps | null>(null);
 
   const contextValue: UserContextProps = {
@@ -25,13 +27,26 @@ const UserContextProvider: FC<Props> = ({ children }) => {
     setData: setData,
   };
 
-    console.log(data)
-    
-  return (
-    <userContext.Provider value={contextValue}>
-      {children}
-    </userContext.Provider>
-  );
+  useEffect(() => {
+    const initial = async () => {
+      try {
+        const response = await fetch(`/api/initial`);
+        if (!response.ok) {
+          throw new Error('Initial data fetch failed');
+        }
+        const data = await response.json();
+        setData(data);
+        router.replace('/tech');
+      } catch (error) {
+        console.error(error);
+        router.push('/');
+      }
+    };
+
+    initial();
+  }, []);
+
+  return <userContext.Provider value={contextValue}>{children}</userContext.Provider>;
 };
 
 export default UserContextProvider;

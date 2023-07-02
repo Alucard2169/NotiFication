@@ -1,9 +1,13 @@
 import { FC,useContext } from 'react';
 import { authContext, AuthContextProps } from "@/context/AuthContext";
-import Link from 'next/link';
 
-const Home: FC = () => {
-  const contextValue = useContext(authContext) ?? ({} as AuthContextProps);
+
+interface dta {
+  data: any
+}
+
+const Home: FC<dta> = ({data}) => {
+  const contextValue = useContext(authContext)  as AuthContextProps;
 
   const { setState } = contextValue;
 
@@ -35,3 +39,4 @@ const Home: FC = () => {
 };
 
 export default Home;
+
