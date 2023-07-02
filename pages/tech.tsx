@@ -1,5 +1,4 @@
-import { FC, useContext } from 'react';
-import { authContext, AuthContextProps } from '@/context/AuthContext';
+import { FC,  } from 'react';
 import PlatformContainer from '@/Components/PlatformContainer';
 import PreviewTech from '@/Components/PreviewTech';
 
