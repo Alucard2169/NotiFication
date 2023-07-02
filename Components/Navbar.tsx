@@ -9,6 +9,15 @@ const Navbar: FC = () => {
   const router = useRouter();
   const [select, setSelect] = useState<string>("tech");
 
+
+  // Check if the current route is the homepage (index.tsx)
+  const isHomepage = router.pathname === "/";
+
+  // Render the navbar only if it's not the homepage
+  if (isHomepage) {
+    return null;
+  }
+
   const handleSelect = (prop: string): void => {
     setSelect(prop);
   };
