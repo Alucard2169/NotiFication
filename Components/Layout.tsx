@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from "react";
 import Navbar from "./Navbar";
-import Auth from "./Auth";
 import Loading from "./Loading";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -38,7 +37,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <Loading />
       ) : (
         <>
-          <Auth />
           <Navbar />
           {children}
         </>

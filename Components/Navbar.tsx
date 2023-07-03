@@ -9,9 +9,8 @@ const Navbar: FC = () => {
   const router = useRouter();
   const [select, setSelect] = useState<string>("tech");
 
-
   // Check if the current route is the homepage (index.tsx)
-  const isHomepage = router.pathname === "/";
+  const isHomepage = router.pathname === "/" || router.pathname === "/auth";
 
   // Render the navbar only if it's not the homepage
   if (isHomepage) {
@@ -25,14 +24,11 @@ const Navbar: FC = () => {
   // Check if the current route is "/tech"
   const isTechPage = router.pathname === "/tech";
 
+  const handleLogout = async () => {
+    const response = await fetch("/api/logout");
 
-
-const handleLogout = async () => {
-  const response = await fetch('/api/logout');
-
-    router.replace('/');
+    router.replace("/");
   };
-
 
   return (
     <nav className="w-screen px-8 py-2 flex justify-between items-center bg-PRIMARY">
@@ -46,22 +42,23 @@ const handleLogout = async () => {
           >
             <Link href="/tech">Tech</Link>
           </li>
-        )
-      : <li
+        ) : (
+          <li
             className={`${
               select === "tech" ? "custom-list" : "custom-list-N"
             } transition-all duration-200`}
             onClick={() => handleSelect("tech")}
           >
             Tech
-          </li>}
+          </li>
+        )}
         <li
           className={`${
             select !== "tech" ? "custom-list" : "custom-list-N"
           } transition-all duration-200`}
           onClick={() => handleSelect("project")}
         >
-         <Link href="/project">Projects</Link>
+          <Link href="/project">Projects</Link>
         </li>
       </ul>
       <form className="flex items-baseline gap-4 m-auto">
@@ -76,7 +73,10 @@ const handleLogout = async () => {
         </label>
       </form>
       <ul className="flex gap-8 items-center">
-        <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer" onClick={handleLogout}>
+        <li
+          className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+          onClick={handleLogout}
+        >
           Logout
         </li>
         <Image
