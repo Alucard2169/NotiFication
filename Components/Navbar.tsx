@@ -70,15 +70,17 @@ const Navbar: FC = () => {
             Logout
           </li>
         )}
-        <Link href={`/user/${data?.user_id}`} as={`/user/${data?.username}`}>
-          <Image
-            alt="userPfp"
-            className="rounded-full w-10 h-10 object-cover"
-            width={50}
-            height={70}
-            src={pfp}
-          />
-        </Link>
+        {data && (
+          <Link href={`/user/${data?.user_id}`}>
+            <Image
+              alt="userPfp"
+              className="rounded-full w-10 h-10 object-cover"
+              width={50}
+              height={70}
+              src={pfp}
+            />
+          </Link>
+        )}
       </ul>
     </nav>
   );
