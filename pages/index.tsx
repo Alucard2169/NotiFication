@@ -17,7 +17,7 @@ const Tech: FC = () => {
   };
   return (
     <div className="bg-MAIN flex flex-col gap-8 p-4 w-screen  flex justify-center items-center">
-      <div className="flex flex-col gap-8 items-center mt-52">
+      <div className="flex flex-col gap-16 items-center mt-52">
         <h1 className="text-white font-bold text-3xl">
           Welcome To{" "}
           <span className="bg-COMPONENT_BG p-2 rounded-md ">notify</span>

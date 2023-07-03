@@ -53,7 +53,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
 
   return (
     <div
-      className="p-2 rounded-md flex flex-col gap-2 w-96 bg-PRIMARY"
+      className="p-2 rounded-md flex flex-col gap-2 lg:w-96 bg-PRIMARY sm:w-full"
       key={key}
     >
       <h1 className="bg-MAIN rounded-lg w-fit p-2 text-COMPONENT_BG font-semibold text-xl">
