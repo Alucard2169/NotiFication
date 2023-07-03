@@ -68,7 +68,7 @@ const Navbar: FC = () => {
             type="text"
             id="search"
             className="rounded-full py-2 pl-10 pr-4 text-md focus:outline-COMPONENT_BG focus:bg-MAIN focus:text-COMPONENT_BG bg-COMPONENT_BG text-MAIN font-semibold outline-none placeholder:text-MAIN transition-all duration-200"
-            placeholder="ex: NPM or ReactJS"
+            placeholder="ex: npm or react"
             value={name}
             onChange={handleTechChange}
           />

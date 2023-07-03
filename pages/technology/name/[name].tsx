@@ -45,12 +45,21 @@ interface TechProps {
 }
 
 const SearchResult: FC<TechProps> = ({ techData }) => {
+  console.log(techData);
   return (
-    <div className="grid grid-cols-3 p-8 gap-8">
-      {techData.map((tech, i) => (
-        <TechCard tech={tech} key={i} />
-      ))}
-    </div>
+    <>
+      {techData.length === 0 ? (
+        <p className="text-center  p-8 text-COMPONENT_BG font-semibold text-3xl">
+          No Data
+        </p>
+      ) : (
+        <div className="grid grid-cols-3 p-8 gap-8">
+          {techData.map((tech, i) => (
+            <TechCard tech={tech} key={i} />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
