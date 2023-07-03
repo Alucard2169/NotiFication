@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, {
   FC,
   createContext,
@@ -27,7 +26,6 @@ interface Props {
 export const userContext = createContext<UserContextProps | null>(null);
 
 const UserContextProvider: FC<Props> = ({ children }) => {
-  const router = useRouter();
   const [data, setData] = useState<StateProps | null>(null);
 
   const contextValue: UserContextProps = {
@@ -44,12 +42,8 @@ const UserContextProvider: FC<Props> = ({ children }) => {
         }
         const data = await response.json();
         setData(data);
-        if (router.pathname === "/") {
-          router.replace("/tech");
-        } else return;
       } catch (error) {
         console.error(error);
-        router.push("/");
       }
     };
 

@@ -8,25 +8,13 @@ import { UserContextProps, userContext } from "@/context/UserContext";
 
 const Navbar: FC = () => {
   const userContextValue = useContext(userContext) as UserContextProps;
-  const { data } = userContextValue;
+  const { data, setData } = userContextValue;
   const router = useRouter();
-  const [select, setSelect] = useState<string>("tech");
   const [name, setName] = useState<string>("");
 
-  const isHomepage = router.pathname === "/" || router.pathname === "/auth";
-  if (isHomepage) {
-    return null;
-  }
-
-  const handleSelect = (prop: string): void => {
-    setSelect(prop);
-  };
-
-  const isTechPage = router.pathname === "/tech";
-
   const handleLogout = async () => {
+    setData(null);
     const response = await fetch("/api/logout");
-    router.replace("/");
   };
 
   const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
@@ -41,25 +29,9 @@ const Navbar: FC = () => {
   return (
     <nav className="w-screen px-8 py-2 flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
-        {!isTechPage ? (
-          <li
-            className={`${
-              select === "tech" ? "custom-list" : "custom-list-N"
-            } transition-all duration-200`}
-            onClick={() => handleSelect("tech")}
-          >
-            <Link href="/tech">Tech</Link>
-          </li>
-        ) : (
-          <li
-            className={`${
-              select === "tech" ? "custom-list" : "custom-list-N"
-            } transition-all duration-200`}
-            onClick={() => handleSelect("tech")}
-          >
-            Tech
-          </li>
-        )}
+        <li className={`${"custom-list"} transition-all duration-200`}>
+          <Link href="/">notify</Link>
+        </li>
       </ul>
       <form
         className="flex items-baseline gap-4 m-auto"
@@ -78,12 +50,24 @@ const Navbar: FC = () => {
         </label>
       </form>
       <ul className="flex gap-8 items-center">
-        <li
-          className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
-          onClick={handleLogout}
-        >
-          Logout
-        </li>
+        {!data && (
+          <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">
+            <Link href="/auth">Login</Link>
+          </li>
+        )}
+        {!data && (
+          <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">
+            <Link href="/auth">SignUp</Link>
+          </li>
+        )}
+        {data && (
+          <li
+            className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
+          </li>
+        )}
         <Link href={`/user/${data?.user_id}`} as={`/user/${data?.username}`}>
           <Image
             alt="userPfp"

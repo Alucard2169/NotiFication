@@ -70,7 +70,7 @@ const Auth: FC = () => {
         const data = await response.json();
         setData(data);
         resetForm();
-        router.push("/tech");
+        router.push("/");
       } else {
         // Handle login error
         const errorData = await response.json();
