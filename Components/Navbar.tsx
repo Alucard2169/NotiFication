@@ -2,10 +2,13 @@ import { useRouter } from "next/router";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import pfp from "@/public/1.jpg";
-import { useState, FC, FormEvent, ChangeEvent } from "react";
+import { useState, FC, FormEvent, ChangeEvent, useContext } from "react";
 import Link from "next/link";
+import { UserContextProps, userContext } from "@/context/UserContext";
 
 const Navbar: FC = () => {
+  const userContextValue = useContext(userContext) as UserContextProps;
+  const { data } = userContextValue;
   const router = useRouter();
   const [select, setSelect] = useState<string>("tech");
   const [name, setName] = useState<string>("");
@@ -81,13 +84,15 @@ const Navbar: FC = () => {
         >
           Logout
         </li>
-        <Image
-          alt="userPfp"
-          className="rounded-full w-10 h-10 object-cover"
-          width={50}
-          height={70}
-          src={pfp}
-        />
+        <Link href={`/user/${data?.user_id}`} as={`/user/${data?.username}`}>
+          <Image
+            alt="userPfp"
+            className="rounded-full w-10 h-10 object-cover"
+            width={50}
+            height={70}
+            src={pfp}
+          />
+        </Link>
       </ul>
     </nav>
   );
