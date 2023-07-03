@@ -1,31 +1,32 @@
 import { FC, useState, useContext } from "react";
-import { useRouter } from "next/router";
 
 import {
   AiFillCloseCircle,
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
+import { authContext, AuthContextProps } from "@/context/AuthFormContext";
 import { userContext, UserContextProps } from "@/context/UserContext";
-import Link from "next/link";
 
 const Auth: FC = () => {
-  const router = useRouter();
-
+  const contextValue = useContext(authContext) as AuthContextProps;
+  const { state, setState } = contextValue;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { setData } = userContextValue;
+
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>("login");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-
+  console.log(state);
   const resetForm = () => {
     setError(null);
     setUsername("");
     setPassword("");
     setEmail("");
+    setState(false);
     setFormContent("login");
   };
 
@@ -52,6 +53,7 @@ const Auth: FC = () => {
   };
 
   const handleAuthFormVisibility = (): void => {
+    setState(false);
     setFormContent("login");
   };
 
@@ -70,7 +72,6 @@ const Auth: FC = () => {
         const data = await response.json();
         setData(data);
         resetForm();
-        router.push("/");
       } else {
         // Handle login error
         const errorData = await response.json();
@@ -97,7 +98,6 @@ const Auth: FC = () => {
         const data = await response.json();
         setData(data);
         resetForm();
-        router.push("/tech");
       } else {
         // Handle login error
         const errorData = await response.json();
@@ -110,14 +110,15 @@ const Auth: FC = () => {
   };
 
   return (
-    <div className="fixed  bg-black w-screen h-screen z-100 flex justify-center items-center">
-      <Link href="/">
-        {" "}
-        <AiFillCloseCircle
-          className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white"
-          onClick={handleAuthFormVisibility}
-        />
-      </Link>
+    <div
+      className={`fixed z-50 bg-black w-screen h-screen  flex justify-center items-center ${
+        !state ? "hidden" : null
+      }`}
+    >
+      <AiFillCloseCircle
+        className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white"
+        onClick={handleAuthFormVisibility}
+      />
       <form
         className="flex flex-col gap-8 items-center w-1/4 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
         onSubmit={(e) => {
@@ -151,7 +152,7 @@ const Auth: FC = () => {
 
         <div className="flex flex-col gap-4 w-full relative">
           <label
-            htmlFor="Password"
+            htmlFor="password"
             className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Password
@@ -177,7 +178,7 @@ const Auth: FC = () => {
           )}
         </div>
 
-        {formContent === "sign" ? (
+        {formContent === "sign" && (
           <div className={`flex flex-col gap-4 w-full overflow-hidden `}>
             <label
               htmlFor="email"
@@ -196,7 +197,7 @@ const Auth: FC = () => {
               required
             />
           </div>
-        ) : null}
+        )}
 
         <input
           type="submit"

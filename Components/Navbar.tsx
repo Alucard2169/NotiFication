@@ -5,8 +5,11 @@ import pfp from "@/public/1.jpg";
 import { useState, FC, FormEvent, ChangeEvent, useContext } from "react";
 import Link from "next/link";
 import { UserContextProps, userContext } from "@/context/UserContext";
+import { AuthContextProps, authContext } from "@/context/AuthFormContext";
 
 const Navbar: FC = () => {
+  const authContextValue = useContext(authContext) as AuthContextProps;
+  const { setState } = authContextValue;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data, setData } = userContextValue;
   const router = useRouter();
@@ -15,6 +18,7 @@ const Navbar: FC = () => {
   const handleLogout = async () => {
     setData(null);
     const response = await fetch("/api/logout");
+    router.push("/");
   };
 
   const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
@@ -37,7 +41,7 @@ const Navbar: FC = () => {
         className="flex items-baseline gap-4 m-auto"
         onSubmit={handleSearch}
       >
-        <label htmlFor="search" className="relative">
+        <label htmlFor="search" className="relative z-10">
           <FiSearch className="absolute left-2 top-1/3 text-white font-bold" />
           <input
             type="text"
@@ -51,13 +55,11 @@ const Navbar: FC = () => {
       </form>
       <ul className="flex gap-8 items-center">
         {!data && (
-          <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">
-            <Link href="/auth">Login</Link>
-          </li>
-        )}
-        {!data && (
-          <li className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer">
-            <Link href="/auth">SignUp</Link>
+          <li
+            className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+            onClick={() => setState(true)}
+          >
+            SignUp
           </li>
         )}
         {data && (

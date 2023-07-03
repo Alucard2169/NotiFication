@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import Auth from "./Auth";
 import Navbar from "./Navbar";
 import Loading from "./Loading";
 import { useState, useEffect } from "react";
@@ -37,6 +38,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <Loading />
       ) : (
         <>
+          <Auth />
           <Navbar />
           {children}
         </>
