@@ -1,6 +1,9 @@
-import { FC,  } from 'react';
-import PlatformContainer from '@/Components/PlatformContainer';
-import PreviewTech from '@/Components/PreviewTech';
+import { FC, lazy } from "react";
+const lazyPlatformContainer = lazy(
+  () => import("@/Components/PlatformContainer")
+);
+import PlatformContainer from "@/Components/PlatformContainer";
+import PreviewTech from "@/Components/PreviewTech";
 
 interface platformData {
   name: string;
@@ -59,7 +62,10 @@ const Tech: FC<homeProps> = ({ platformData, techResult }) => {
     <div className="bg-MAIN flex flex-col gap-8 p-4 w-screen">
       <div className="flex flex-col gap-8">
         <h3 className="text-white text-xl font-bold">
-          Available Package Managers <span className="text-COMPONENT_BG text-md">{platformData.length}</span>
+          Available Package Managers{" "}
+          <span className="text-COMPONENT_BG text-md">
+            {platformData.length}
+          </span>
         </h3>
         <PlatformContainer data={platformData} />
       </div>
@@ -75,16 +81,16 @@ export default Tech;
 
 export async function getStaticProps() {
   try {
-    const apiBaseUrl = 'https://libraries.io/api';
+    const apiBaseUrl = "https://libraries.io/api";
     const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
 
     const [platformResponse, reactResponse] = await Promise.all([
-      fetch(`${apiBaseUrl}/platforms?api_key=${apiKey}&per_page=10`).then(response => response.json()),
-      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}&per_page=6`).then(response => response.json()),
+      fetch(`${apiBaseUrl}/platforms?api_key=${apiKey}&per_page=10`),
+      fetch(`${apiBaseUrl}/search?q=react&api_key=${apiKey}&per_page=6`),
     ]);
 
-    const platformData = platformResponse;
-    const techResult = reactResponse;
+    const platformData = await platformResponse.json();
+    const techResult = await reactResponse.json();
 
     return {
       props: {
