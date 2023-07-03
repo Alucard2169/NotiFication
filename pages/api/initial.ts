@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getCookie } from 'cookies-next';
-import jwt from 'jsonwebtoken';
+import { PrismaClient } from "@prisma/client";
+import { NextApiRequest, NextApiResponse } from "next";
+import { getCookie } from "cookies-next";
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
@@ -20,23 +20,27 @@ export default async function handler(
   res: NextApiResponse<Data | Error>
 ) {
   try {
-      const token: any | undefined = getCookie('token', { req, res });
-      
+    const token: any | undefined = getCookie("token", { req, res });
+
     if (!token) {
-      throw new Error('Login required');
+      throw new Error("Login required");
     } else {
-        const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || '');
-        
+      const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || "");
+
       const userId: number = decodedToken?.userId;
-        
+
       if (!decodedToken) {
-        throw new Error('Invalid Token');
+        throw new Error("Invalid Token");
       } else {
         const findUser = await prisma.users.findUnique({
           where: {
             user_id: userId,
           },
         });
+
+        if (!findUser) {
+          throw new Error("User not found in Database");
+        }
 
         const userData: Data = {
           user_id: findUser?.user_id || null,
