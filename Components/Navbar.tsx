@@ -2,17 +2,15 @@ import { useRouter } from "next/router";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import pfp from "@/public/1.jpg";
-import { useState, FC } from "react";
+import { useState, FC, FormEvent, ChangeEvent } from "react";
 import Link from "next/link";
 
 const Navbar: FC = () => {
   const router = useRouter();
   const [select, setSelect] = useState<string>("tech");
+  const [name, setName] = useState<string>("");
 
-  // Check if the current route is the homepage (index.tsx)
   const isHomepage = router.pathname === "/" || router.pathname === "/auth";
-
-  // Render the navbar only if it's not the homepage
   if (isHomepage) {
     return null;
   }
@@ -21,13 +19,20 @@ const Navbar: FC = () => {
     setSelect(prop);
   };
 
-  // Check if the current route is "/tech"
   const isTechPage = router.pathname === "/tech";
 
   const handleLogout = async () => {
     const response = await fetch("/api/logout");
-
     router.replace("/");
+  };
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    router.push(`/technology/name/${name}`);
+  };
+
+  const handleTechChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setName(e.target.value);
   };
 
   return (
@@ -52,16 +57,11 @@ const Navbar: FC = () => {
             Tech
           </li>
         )}
-        <li
-          className={`${
-            select !== "tech" ? "custom-list" : "custom-list-N"
-          } transition-all duration-200`}
-          onClick={() => handleSelect("project")}
-        >
-          <Link href="/project">Projects</Link>
-        </li>
       </ul>
-      <form className="flex items-baseline gap-4 m-auto">
+      <form
+        className="flex items-baseline gap-4 m-auto"
+        onSubmit={handleSearch}
+      >
         <label htmlFor="search" className="relative">
           <FiSearch className="absolute left-2 top-1/3 text-white font-bold" />
           <input
@@ -69,6 +69,8 @@ const Navbar: FC = () => {
             id="search"
             className="rounded-full py-2 pl-10 pr-4 text-md focus:outline-COMPONENT_BG focus:bg-MAIN focus:text-COMPONENT_BG bg-COMPONENT_BG text-MAIN font-semibold outline-none placeholder:text-MAIN transition-all duration-200"
             placeholder="ex: NPM or ReactJS"
+            value={name}
+            onChange={handleTechChange}
           />
         </label>
       </form>

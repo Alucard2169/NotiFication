@@ -1,7 +1,4 @@
-import { FC, lazy } from "react";
-const lazyPlatformContainer = lazy(
-  () => import("@/Components/PlatformContainer")
-);
+import { FC } from "react";
 import PlatformContainer from "@/Components/PlatformContainer";
 import PreviewTech from "@/Components/PreviewTech";
 

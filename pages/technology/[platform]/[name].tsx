@@ -64,7 +64,6 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
 
     return formattedDate;
   };
-
   const {
     name,
     language,

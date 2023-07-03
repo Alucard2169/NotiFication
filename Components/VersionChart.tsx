@@ -57,7 +57,12 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
   return (
     <div className="relative w-1/2 bg-PRIMARY rounded-md p-4">
       <div className="flex w-full justify-between items-center">
-        <h3 className="text-white font-semibold text-2xl">Version</h3>
+        <h3 className="text-white font-semibold text-2xl">
+          Version{" "}
+          <span className="text-COMPONENT_BG font-semibold text-lg">
+            ({versions.length})
+          </span>
+        </h3>
         <button onClick={toggleOrder} className="text-white mt-4">
           {isAscending ? (
             <BiUpArrow className="text-COMPONENT_BG text-2xl" />

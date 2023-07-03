@@ -1,6 +1,5 @@
-import { FC, useState } from "react";
-
-import TechCard from "./TechCard";
+import TechCard from "@/Components/TechCard";
+import { FC } from "react";
 
 interface TechData {
   contributions_count: number;
@@ -41,18 +40,43 @@ interface Version {
   repository_sources: string[];
 }
 
-interface PreviewProps {
-  data: TechData[];
+interface TechProps {
+  techData: TechData[];
 }
 
-const PreviewTech: FC<PreviewProps> = ({ data }) => {
+const SearchResult: FC<TechProps> = ({ techData }) => {
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-y-8 gap-x-4">
-      {data.map((tech, i) => (
+    <div className="grid grid-cols-3 p-8 gap-8">
+      {techData.map((tech, i) => (
         <TechCard tech={tech} key={i} />
       ))}
     </div>
   );
 };
 
-export default PreviewTech;
+export default SearchResult;
+
+export async function getServerSideProps(context: any) {
+  const { name } = context.query;
+
+  try {
+    const apiBaseUrl = "https://libraries.io/api";
+    const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
+
+    const techResponse = await fetch(
+      `${apiBaseUrl}/search?q=${name}&api_key=${apiKey}`
+    );
+    const techData = await techResponse.json();
+
+    return {
+      props: {
+        techData,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: {},
+    };
+  }
+}
