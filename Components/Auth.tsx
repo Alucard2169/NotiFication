@@ -46,6 +46,7 @@ const Auth: FC = () => {
     setFormContent((prevFormContent) =>
       prevFormContent === "login" ? "sign" : "login"
     );
+    setError(null);
   };
 
   const handleTogglePassword = (): void => {
