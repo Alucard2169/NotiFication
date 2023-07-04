@@ -81,7 +81,7 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
           {!showAll && (
             <button
               onClick={handleViewMore}
-              className="absolute text-MAIN font-semibold text-3xl w-fit bottom-1/4 left-0 right-0 mx-auto bg-COMPONENT_BG px-2 py-1 rounded-md"
+              className="absolute text-MAIN font-semibold text-3xl w-fit bottom-16 left-0 right-0 mx-auto bg-COMPONENT_BG px-2 py-1 rounded-md"
             >
               {isLoading ? "Loading" : "View More"}
             </button>

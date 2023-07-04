@@ -2,6 +2,7 @@ import { FC } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Tech: FC = () => {
   const router = useRouter();

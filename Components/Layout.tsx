@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Loading from "./Loading";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 interface LayoutProps {
   children: ReactNode;
@@ -34,6 +35,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   }, [router]);
   return (
     <div className="bg-MAIN w-screen h-screen overflow-x-hidden">
+      <Head>
+        <title>notify</title>
+      </Head>
       {isLoading ? (
         <Loading />
       ) : (

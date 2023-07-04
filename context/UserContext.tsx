@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, {
   FC,
   createContext,
@@ -26,6 +27,7 @@ interface Props {
 export const userContext = createContext<UserContextProps | null>(null);
 
 const UserContextProvider: FC<Props> = ({ children }) => {
+  const router = useRouter();
   const [data, setData] = useState<StateProps | null>(null);
 
   const contextValue: UserContextProps = {
@@ -38,6 +40,7 @@ const UserContextProvider: FC<Props> = ({ children }) => {
       try {
         const response = await fetch(`/api/initial`);
         if (!response.ok) {
+          router.push("/");
           throw new Error("Initial data fetch failed");
         }
         const data = await response.json();

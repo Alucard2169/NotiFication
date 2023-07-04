@@ -8,8 +8,20 @@ datasource db {
 }
 
 model users {
-  user_id       Int    @id @default(autoincrement())
-  username      String @unique @db.VarChar(30)
-  email         String @unique @db.VarChar(60)
-  user_password String @db.VarChar(60)
+  user_id       Int        @id @default(autoincrement())
+  username      String     @unique @db.VarChar(30)
+  email         String     @unique @db.VarChar(60)
+  user_password String     @db.VarChar(60)
+  packages      packages[]
+}
+
+model packages {
+  package_id   String   @id @db.VarChar(36)
+  user_id      Int?
+  project_name String?  @db.VarChar(50)
+  platform     String?  @db.VarChar(50)
+  notification Boolean? @default(false)
+  users        users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "packages_ibfk_1")
+
+  @@index([user_id], map: "user_id")
 }

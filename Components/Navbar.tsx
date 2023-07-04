@@ -17,11 +17,11 @@ const Navbar: FC = () => {
   const handleLogout = async () => {
     setData(null);
     const response = await fetch("/api/logout");
-    router.push("/");
+    if (router.pathname.startsWith(`/user/`)) router.push("/");
   };
 
   return (
-    <nav className="w-screen px-8 py-2 sm:px-4 flex justify-between items-center bg-PRIMARY">
+    <nav className="w-screen lg:px-8 py-2 sm:px-4 flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
         <li className={`${"custom-list"} transition-all duration-200`}>
           <Link href="/">notify</Link>

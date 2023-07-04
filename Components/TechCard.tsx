@@ -1,7 +1,11 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { FiGlobe, FiStar, FiPackage } from "react-icons/fi";
-import { AiFillGithub, AiFillInfoCircle } from "react-icons/ai";
+import { AiFillGithub, AiFillInfoCircle, AiFillBell } from "react-icons/ai";
 import Link from "next/link";
+import { UserContextProps, userContext } from "@/context/UserContext";
+import { AuthContextProps, authContext } from "@/context/AuthFormContext";
 
 interface TechData {
   contributions_count: number;
@@ -46,9 +50,95 @@ interface TechProps {
   tech: TechData;
   key: number;
 }
+
+interface handleStoreProps {
+  package_id: string;
+  user_id: number;
+  project_name: string;
+  platform: string;
+  notification: boolean;
+}
+
 const TechCard: FC<TechProps> = ({ tech, key }) => {
+  const userContextValue = useContext(userContext) as UserContextProps;
+  const { data } = userContextValue;
+  const authContextValue = useContext(authContext) as AuthContextProps;
+  const { setState } = authContextValue;
   const addCommasToNumber = (number: number): string => {
     return number.toLocaleString();
+  };
+
+  const handleStore = async (data: handleStoreProps): Promise<void> => {
+    const { package_id, user_id, project_name, platform, notification } = data;
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          package_id,
+          user_id,
+          project_name,
+          platform,
+          notification,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+      } else {
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubscribe = async (): Promise<void> => {
+    if (data === null) {
+      return;
+    }
+    const { user_id } = data;
+
+    const { name, platform } = tech;
+
+    try {
+      const response = await fetch(
+        `https://libraries.io/api/subscriptions/${platform}/${name}?api_key=${process.env.NEXT_PUBLIC_LIB_API_KEY}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data);
+        console.log("success");
+
+        const storeData = {
+          package_id: uuidv4(),
+          user_id,
+          project_name: name,
+          platform,
+          notification: true,
+        };
+        console.log(storeData);
+        handleStore(storeData);
+      } else {
+        console.log("error");
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  const handleAuth = () => {
+    setState(true);
   };
 
   return (
@@ -56,9 +146,22 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
       className="p-2 rounded-md flex flex-col gap-2 lg:w-96 bg-PRIMARY sm:w-full"
       key={key}
     >
-      <h1 className="bg-MAIN rounded-lg w-fit p-2 text-COMPONENT_BG font-semibold text-xl">
-        {tech.name}
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="bg-MAIN rounded-lg w-fit p-2 text-COMPONENT_BG font-semibold text-xl">
+          {tech.name}
+        </h1>
+        {!data ? (
+          <AiFillBell
+            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_BG cursor-pointer hover:text-white"
+            onClick={handleAuth}
+          />
+        ) : (
+          <AiFillBell
+            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_BG cursor-pointer hover:text-white"
+            onClick={handleSubscribe}
+          />
+        )}
+      </div>
       <div className="bg-MAIN rounded-lg p-2 flex flex-col gap-4 h-full justify-between">
         <p className="text-white text-md font-semibold">{tech.description}</p>
         <ul className="bg-COMPONENT_BG flex gap-4 p-2 rounded-md">
