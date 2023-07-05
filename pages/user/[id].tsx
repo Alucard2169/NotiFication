@@ -50,17 +50,43 @@ const Profile = () => {
     setIsLoading(false);
   };
 
-  // const getUpdates = async () => {
-  //   try {
-
-  //   }
-  // }
+  const getUpdates = async () => {
+    if (data === null) {
+      return;
+    }
+    const { user_id } = data;
+    try {
+      const response = await fetch(`/api/checkUpdates?id=${user_id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setUpdates(data.messages);
+      } else {
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (data !== null) {
       fetchProjects();
     }
   }, [data]);
+
+  useEffect(() => {
+    // Function to be called every 3 hours
+    getUpdates();
+
+    //interval to call the function every 3 hours
+    const interval = setInterval(getUpdates, 3 * 60 * 60 * 1000); // 3 hours in milliseconds
+
+    // Clean up the interval when the component is unmounted
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <div className="p-8 flex gap-8">
@@ -108,9 +134,16 @@ const Profile = () => {
             </div>
           )}
         </section>
-        <section className="bg-PRIMARY p-2 rounded-md w-1/2">
+        <section className="bg-PRIMARY p-2 rounded-md w-1/2 flex flex-col gap-8">
           <h2 className="text-white font-bold text-2xl">Updates</h2>
-          <div></div>
+          <div className="grid gap-4">
+            {updates &&
+              updates.map((update: string) => (
+                <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-1 rounded-md">
+                  {update}
+                </p>
+              ))}
+          </div>
         </section>
       </div>
     </div>

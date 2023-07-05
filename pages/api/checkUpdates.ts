@@ -4,15 +4,36 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const API_KEY = process.env.LIB_API_KEY;
 
+interface Project {
+  user_id: number | null;
+  platform: string;
+  project_name: string;
+  package_id: string;
+  current_version: string;
+  last_date: string;
+}
+
+interface RequestData {
+  id?: string;
+}
+
+const convertDate = (date: string): Date => {
+  const dateObject = new Date(date);
+  return dateObject;
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const userId = req.query.userId as string;
+    const { id }: RequestData = req.query;
+
+    // Convert the id to an integer
+    const userId = id ? parseInt(id, 10) : undefined;
 
     const user = await prisma.users.findUnique({
-      where: { id: userId },
+      where: { user_id: userId },
       include: { packages: true },
     });
 
@@ -20,12 +41,13 @@ export default async function handler(
       return res.status(404).json({ message: "User not found" });
     }
 
-    const subscribedProjects = user.packages;
+    const subscribedProjects: Project[] = user.packages as Project[];
+
+    const updateMessages: string[] = []; // Store update messages for each project
 
     for (const project of subscribedProjects) {
       const { platform, project_name, package_id } = project;
 
-      // Make a request to libraries.io API to get the latest information about the project
       const url = `https://libraries.io/api/${platform}/${project_name}?api_key=${API_KEY}`;
 
       try {
@@ -34,13 +56,19 @@ export default async function handler(
           const projectInfo = await response.json();
           const latestVersion = projectInfo.latest_release_number;
           const latestDate = projectInfo.latest_release_published_at;
+          const newDate = convertDate(projectInfo.latest_release_published_at);
 
-          // Compare the latest version and date with the stored version and date
+          const lastDate = convertDate(project.last_date);
+
+          // Calculate the difference in months between the new and last dates
+          const monthDifference =
+            (newDate.getFullYear() - lastDate.getFullYear()) * 12 +
+            (newDate.getMonth() - lastDate.getMonth());
+
           if (
             latestVersion !== project.current_version ||
-            latestDate > project.last_date
+            monthDifference <= 1
           ) {
-            // Update the project information in the database
             await prisma.packages.update({
               where: { package_id },
               data: {
@@ -49,26 +77,26 @@ export default async function handler(
               },
             });
 
-            // Send the notification to the user
-            sendNotification(project_name, latestVersion, latestDate);
+            const updateMessage = sendNotification(
+              project_name,
+              latestVersion,
+              newDate
+            );
+            updateMessages.push(updateMessage);
           }
         } else {
-          // Handle API request errors
           console.error(
             `Error retrieving project information for ${platform}/${project_name}: ${response.status}`
           );
         }
-      } catch (error) {
-        // Handle API request errors
+      } catch (error: any) {
         console.error(
           `Error retrieving project information for ${platform}/${project_name}: ${error.message}`
         );
       }
     }
 
-    return res
-      .status(200)
-      .json({ message: "Project updates checked successfully" });
+    return res.status(200).json({ messages: updateMessages, status: "ok" });
   } catch (error) {
     console.error("Error retrieving user and project information:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -78,9 +106,12 @@ export default async function handler(
 function sendNotification(
   projectName: string,
   latestVersion: string,
-  latestDate: string
+  latestDate: Date
 ) {
-  const message = `${projectName}: ${latestVersion} released on ${latestDate}.`;
-  // Implement your notification sending logic here (e.g., email, in-app notification)
-  console.log("Sending notification:", message);
+  const currentDate = new Date();
+  const timeDifference = currentDate.getTime() - latestDate.getTime();
+  const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Calculate the difference in days
+
+  const message = `${projectName} - ${latestVersion} published ${daysAgo} days ago`;
+  return message;
 }

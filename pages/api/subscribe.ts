@@ -14,6 +14,8 @@ interface RequestData {
   project_name: string;
   platform: string;
   notification: boolean;
+  current_version: string;
+  last_date: string;
 }
 
 interface ErrorResponse {
@@ -26,10 +28,18 @@ export default async function handler(
 ) {
   try {
     const requestData: RequestData = req.body;
-    const { package_id, user_id, project_name, platform, notification } =
-      requestData;
+    const {
+      package_id,
+      user_id,
+      project_name,
+      platform,
+      notification,
+      current_version,
+      last_date,
+    } = requestData;
+
     console.log(requestData);
-    // store the package into database
+    // store the package into the database
     const createdPackage = await prisma.packages.create({
       data: {
         package_id,
@@ -37,6 +47,8 @@ export default async function handler(
         project_name,
         platform,
         notification,
+        current_version,
+        last_date: last_date,
       },
     });
     console.log(createdPackage);

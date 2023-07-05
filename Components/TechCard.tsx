@@ -57,6 +57,8 @@ interface handleStoreProps {
   project_name: string;
   platform: string;
   notification: boolean;
+  current_version: string;
+  last_date: string;
 }
 
 const TechCard: FC<TechProps> = ({ tech, key }) => {
@@ -102,7 +104,12 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
     }
     const { user_id } = data;
 
-    const { name, platform } = tech;
+    const {
+      name,
+      platform,
+      latest_release_number,
+      latest_release_published_at,
+    } = tech;
 
     try {
       const response = await fetch(
@@ -126,6 +133,8 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
           project_name: name,
           platform,
           notification: true,
+          current_version: latest_release_number,
+          last_date: latest_release_published_at,
         };
         console.log(storeData);
         handleStore(storeData);

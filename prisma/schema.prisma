@@ -16,12 +16,14 @@ model users {
 }
 
 model packages {
-  package_id   String   @id @db.VarChar(36)
-  user_id      Int?
-  project_name String?  @db.VarChar(50)
-  platform     String?  @db.VarChar(50)
-  notification Boolean? @default(false)
-  users        users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "packages_ibfk_1")
+  package_id      String   @id @db.VarChar(36)
+  user_id         Int?
+  project_name    String?  @db.VarChar(50)
+  platform        String?  @db.VarChar(50)
+  notification    Boolean? @default(false)
+  current_version String?  @db.VarChar(60)
+  last_date       String?  @db.VarChar(30)
+  users           users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "packages_ibfk_1")
 
   @@index([user_id], map: "user_id")
 }
