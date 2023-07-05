@@ -3,15 +3,20 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-interface Data {
-  project_id: string;
-  project_name: string;
-  platform: string;
-  notification: boolean;
+interface Package {
+  package_id: string;
+  user_id: number | null;
+  project_name: string | null;
+  platform: string | null;
+  notification: boolean | null;
+}
+
+interface DataProp {
+  Data: Package[];
 }
 
 interface RequestData {
-  id?: number;
+  id?: string;
 }
 
 interface ErrorResponse {
@@ -20,19 +25,26 @@ interface ErrorResponse {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data[] | ErrorResponse>
+  res: NextApiResponse<DataProp | ErrorResponse>
 ) {
   try {
     const { id }: RequestData = req.query;
 
+    // Convert the id to an integer
+    const userId = id ? parseInt(id, 10) : null;
+
     // store the package into the database
-    const findPackages = await prisma.packages.findMany({
+    const data = await prisma.packages.findMany({
       where: {
-        user_id: id,
+        user_id: userId,
       },
     });
 
-    res.status(200).json(findPackages);
+    const responseData: DataProp = {
+      Data: data as Package[], // Type casting to ensure compatibility
+    };
+
+    res.status(200).json(responseData);
   } catch (err: any) {
     console.log(err);
     return res.status(501).json({ error: err.message } as ErrorResponse);
