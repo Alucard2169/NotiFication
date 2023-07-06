@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContextProps, userContext } from "@/context/UserContext";
-import { AiFillInfoCircle, AiFillBell } from "react-icons/ai";
+import { AiFillInfoCircle } from "react-icons/ai";
+import { BiSolidBellOff } from "react-icons/bi";
 import Link from "next/link";
 
 interface ProjectProp {
-  project_id: string;
+  package_id: string;
   project_name: string;
   platform: string;
   notification: boolean;
@@ -57,7 +58,7 @@ const Profile = () => {
     setIsLoading(false);
   };
 
-  const getUpdates = async () => {
+  const getUpdates = async (): Promise<void> => {
     if (data === null) {
       return;
     }
@@ -73,6 +74,44 @@ const Profile = () => {
         const data = await response.json();
         console.log(data);
         setIsUpdateLoading(false);
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
+
+  const handleUnsubscription = async (packageId: string): Promise<void> => {
+    if (data === null) {
+      return;
+    }
+    const { user_id } = data;
+
+    try {
+      const response = await fetch(`/api/deleteSubscription`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          package_id: packageId,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        // Update the projects state by removing the unsubscribed project
+        setProjects((prevProjects) => {
+          if (prevProjects) {
+            return prevProjects.filter(
+              (project) => project.package_id !== packageId
+            );
+          }
+          return null;
+        });
+      } else {
+        const data = await response.json();
+        console.log(data);
       }
     } catch (err: any) {
       console.log(err);
@@ -96,7 +135,7 @@ const Profile = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [projects]);
 
   return (
     <div className="p-8 flex gap-8">
@@ -113,7 +152,7 @@ const Profile = () => {
             <div className="grid grid-cols-3 gap-6 mt-8 h-auto">
               {projects.map((project) => (
                 <div
-                  key={project.project_id}
+                  key={project.package_id}
                   className="flex flex-col gap-2 bg-MAIN p-2 rounded-md"
                 >
                   <h1 className="bg-PRIMARY p-1 rounded-md text-COMPONENT_BG font-semibold text-xl">
@@ -126,9 +165,12 @@ const Profile = () => {
                     </span>
                   </p>
                   <div className="flex justify-between mt-4">
-                    <AiFillBell className="bg-PRIMARY text-COMPONENT_BG p-1 rounded-md text-3xl" />
+                    <BiSolidBellOff
+                      className="bg-PRIMARY text-COMPONENT_BG p-1 rounded-md text-3xl cursor-pointer"
+                      onClick={() => handleUnsubscription(project.package_id)}
+                    />
                     <Link
-                      href={`/technology/${project.platform}/${project.project_name}`}
+                      href={`/technology/${project.platform}/${project.package_id}`}
                     >
                       <AiFillInfoCircle className="bg-PRIMARY text-white p-1 rounded-md text-3xl" />
                     </Link>
