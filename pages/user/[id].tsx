@@ -110,7 +110,7 @@ const Profile = () => {
         <section className="bg-PRIMARY p-2 rounded-md w-1/2">
           <h2 className="text-white font-bold text-2xl">My Projects</h2>
           {projects !== null && projects.length !== 0 ? (
-            <div className="grid grid-cols-3 gap-8 mt-8">
+            <div className="grid grid-cols-3 gap-6 mt-8 h-auto">
               {projects.map((project) => (
                 <div
                   key={project.project_id}

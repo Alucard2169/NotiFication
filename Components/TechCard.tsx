@@ -76,43 +76,11 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
     return number.toLocaleString();
   };
 
-  const handleStore = async (data: handleStoreProps): Promise<void> => {
-    const { package_id, user_id, project_name, platform, notification } = data;
-
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          package_id,
-          user_id,
-          project_name,
-          platform,
-          notification,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setIsLoading(false);
-        setDialogState(true);
-        setMessage(`subscribed to ${data.project_name}`);
-      } else {
-        setIsLoading(false);
-        console.log(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleSubscribe = async (): Promise<void> => {
     if (data === null) {
       return;
     }
     const { user_id } = data;
-
     const {
       name,
       platform,
@@ -122,35 +90,59 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch(
-        `https://libraries.io/api/subscriptions/${platform}/${name}?api_key=${process.env.NEXT_PUBLIC_LIB_API_KEY}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
 
-      if (response.ok) {
-        console.log(data);
-        console.log("success");
-
-        const storeData = {
-          package_id: uuidv4(),
+      const checkResponse = await fetch("/api/checkSubscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           user_id,
           project_name: name,
           platform,
-          notification: true,
-          current_version: latest_release_number,
-          last_date: latest_release_published_at,
-        };
+        }),
+      });
 
-        handleStore(storeData);
+      const checkData = await checkResponse.json();
+
+      if (checkResponse.ok) {
+        if (checkData.subscribed) {
+          setIsLoading(false);
+          setDialogState(true);
+          setMessage(`Already subscribed to ${name}`);
+        } else {
+          const response = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              package_id: uuidv4(),
+              user_id,
+              project_name: name,
+              platform,
+              notification: true,
+              current_version: latest_release_number,
+              last_date: latest_release_published_at,
+            }),
+          });
+
+          const responseData = await response.json();
+
+          if (response.ok) {
+            console.log(responseData);
+            console.log("success");
+            setDialogState(true);
+            setMessage(`Subscribed to ${name}`);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+            console.log("error");
+          }
+        }
       } else {
         setIsLoading(false);
-        console.log("error");
+        console.log(checkData);
       }
     } catch (err: any) {
       console.log(err.message);
