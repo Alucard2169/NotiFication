@@ -1,5 +1,6 @@
 import { FC, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { DialogContextProps, dialogContext } from "@/context/DialogContext";
 
 import { FiGlobe, FiStar, FiPackage } from "react-icons/fi";
 import { AiFillGithub, AiFillInfoCircle, AiFillBell } from "react-icons/ai";
@@ -65,6 +66,9 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data } = userContextValue;
   const authContextValue = useContext(authContext) as AuthContextProps;
+  const { setMessage, setDialogState } = useContext(
+    dialogContext
+  ) as DialogContextProps;
   const { setState } = authContextValue;
   const addCommasToNumber = (number: number): string => {
     return number.toLocaleString();
@@ -89,7 +93,8 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+        setDialogState(true);
+        setMessage(`subscribed to ${data.project_name}`);
       } else {
         console.log(data);
       }

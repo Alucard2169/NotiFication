@@ -2,9 +2,11 @@ import React, { FC, ReactNode } from "react";
 import Auth from "./Auth";
 import Navbar from "./Navbar";
 import Loading from "./Loading";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import DialogBox from "./DialogBox";
+import { DialogContextProps, dialogContext } from "@/context/DialogContext";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +15,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
+  const { dialogState } = useContext(dialogContext) as DialogContextProps;
 
   useEffect(() => {
     const handleStart = () => {
@@ -42,6 +45,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <Loading />
       ) : (
         <>
+          {dialogState && <DialogBox />}
           <Auth />
           <Navbar />
           {children}
