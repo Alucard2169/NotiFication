@@ -10,6 +10,12 @@ interface ProjectProp {
   notification: boolean;
 }
 
+interface UpdateProp {
+  project_name: string;
+  latest_version: string;
+  time: number;
+}
+
 const Profile = () => {
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data } = userContextValue;
@@ -139,12 +145,21 @@ const Profile = () => {
           )}
         </section>
         <section className="bg-PRIMARY p-2 rounded-md w-1/2 flex flex-col gap-8">
-          <h2 className="text-white font-bold text-2xl">Updates</h2>
+          <div className="flex justify-between items-center">
+            <h2 className="text-white font-bold text-2xl">Updates</h2>
+          </div>
           {updates ? (
             <div className="grid gap-4">
-              {updates.map((update: string) => (
-                <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-1 rounded-md">
-                  {update}
+              {updates.map((update: UpdateProp) => (
+                <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-2 rounded-md">
+                  <span className="bg-PRIMARY text-COMPONENT_BG font-semibold text-lg p-1 rounded-md">
+                    {update.project_name}
+                  </span>
+                  -{update.latest_version} - published{" "}
+                  <span className="bg-PRIMARY text-COMPONENT_BG font-semibold text-sm p-1 rounded-md">
+                    {" "}
+                    {update.time} days ago
+                  </span>
                 </p>
               ))}
             </div>

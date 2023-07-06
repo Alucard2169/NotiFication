@@ -13,6 +13,12 @@ interface Project {
   last_date: string;
 }
 
+interface responseMessage {
+  project_name: string;
+  latest_version: string;
+  time: number;
+}
+
 interface RequestData {
   id?: string;
 }
@@ -43,7 +49,7 @@ export default async function handler(
 
     const subscribedProjects: Project[] = user.packages as Project[];
 
-    const updateMessages: string[] = []; // Store update messages for each project
+    const updateMessages: responseMessage[] = []; // Store update messages for each project
 
     for (const project of subscribedProjects) {
       const { platform, project_name, package_id } = project;
@@ -82,7 +88,7 @@ export default async function handler(
               latestVersion,
               newDate
             );
-            updateMessages.push(updateMessage);
+            updateMessages.unshift(updateMessage);
           }
         } else {
           console.error(
@@ -112,6 +118,10 @@ function sendNotification(
   const timeDifference = currentDate.getTime() - latestDate.getTime();
   const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Calculate the difference in days
 
-  const message = `${projectName} - ${latestVersion} published ${daysAgo} days ago`;
+  const message: responseMessage = {
+    project_name: projectName,
+    latest_version: latestVersion,
+    time: daysAgo,
+  };
   return message;
 }
