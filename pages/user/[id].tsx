@@ -170,7 +170,7 @@ const Profile = () => {
                       onClick={() => handleUnsubscription(project.package_id)}
                     />
                     <Link
-                      href={`/technology/${project.platform}/${project.package_id}`}
+                      href={`/technology/${project.platform}/${project.project_name}`}
                     >
                       <AiFillInfoCircle className="bg-PRIMARY text-white p-1 rounded-md text-3xl" />
                     </Link>
