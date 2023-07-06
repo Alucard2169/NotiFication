@@ -15,6 +15,7 @@ const Profile = () => {
   const { data } = userContextValue;
   const [projects, setProjects] = useState<ProjectProp[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isUpdateLoading, setIsUpdateLoading] = useState<boolean>(false);
   const [updates, setUpdates] = useState<any>(null);
 
   const fetchProjects = async (): Promise<void> => {
@@ -56,13 +57,16 @@ const Profile = () => {
     }
     const { user_id } = data;
     try {
+      setIsUpdateLoading(true);
       const response = await fetch(`/api/checkUpdates?id=${user_id}`);
       if (response.ok) {
         const data = await response.json();
         setUpdates(data.messages);
+        setIsUpdateLoading(false);
       } else {
         const data = await response.json();
         console.log(data);
+        setIsUpdateLoading(false);
       }
     } catch (err: any) {
       console.log(err);
@@ -136,14 +140,19 @@ const Profile = () => {
         </section>
         <section className="bg-PRIMARY p-2 rounded-md w-1/2 flex flex-col gap-8">
           <h2 className="text-white font-bold text-2xl">Updates</h2>
-          <div className="grid gap-4">
-            {updates &&
-              updates.map((update: string) => (
+          {updates ? (
+            <div className="grid gap-4">
+              {updates.map((update: string) => (
                 <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-1 rounded-md">
                   {update}
                 </p>
               ))}
-          </div>
+            </div>
+          ) : (
+            <p className="bg-MAIN p-2 rounded-md text-COMPONENT_BG text-xl font-semibold">
+              {isUpdateLoading ? "Loading updates..." : "No updates available"}
+            </p>
+          )}
         </section>
       </div>
     </div>
