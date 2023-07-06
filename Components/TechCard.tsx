@@ -1,7 +1,8 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
+import wait from "@/public/wait.gif";
 import { v4 as uuidv4 } from "uuid";
 import { DialogContextProps, dialogContext } from "@/context/DialogContext";
-
+import Image from "next/image";
 import { FiGlobe, FiStar, FiPackage } from "react-icons/fi";
 import { AiFillGithub, AiFillInfoCircle, AiFillBell } from "react-icons/ai";
 import Link from "next/link";
@@ -63,6 +64,7 @@ interface handleStoreProps {
 }
 
 const TechCard: FC<TechProps> = ({ tech, key }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data } = userContextValue;
   const authContextValue = useContext(authContext) as AuthContextProps;
@@ -93,9 +95,11 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
       });
       const data = await response.json();
       if (response.ok) {
+        setIsLoading(false);
         setDialogState(true);
         setMessage(`subscribed to ${data.project_name}`);
       } else {
+        setIsLoading(false);
         console.log(data);
       }
     } catch (err) {
@@ -117,6 +121,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
     } = tech;
 
     try {
+      setIsLoading(true);
       const response = await fetch(
         `https://libraries.io/api/subscriptions/${platform}/${name}?api_key=${process.env.NEXT_PUBLIC_LIB_API_KEY}`,
         {
@@ -141,9 +146,10 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
           current_version: latest_release_number,
           last_date: latest_release_published_at,
         };
-        console.log(storeData);
+
         handleStore(storeData);
       } else {
+        setIsLoading(false);
         console.log("error");
       }
     } catch (err: any) {
@@ -164,6 +170,15 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
         <h1 className="bg-MAIN rounded-lg w-fit p-2 text-COMPONENT_BG font-semibold text-xl">
           {tech.name}
         </h1>
+        {isLoading ? (
+          <Image
+            src={wait}
+            width={40}
+            height={40}
+            alt="wait gif"
+            className="ml-auto mr-4 rounded-md"
+          />
+        ) : null}
         {!data ? (
           <AiFillBell
             className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_BG cursor-pointer hover:text-white"

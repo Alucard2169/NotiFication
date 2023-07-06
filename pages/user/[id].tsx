@@ -149,7 +149,7 @@ const Profile = () => {
             <h2 className="text-white font-bold text-2xl">Updates</h2>
           </div>
           {updates ? (
-            <div className="grid gap-4">
+            <div className="grid gap-4 h-auto">
               {updates.map((update: UpdateProp) => (
                 <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-2 rounded-md">
                   <span className="bg-PRIMARY text-COMPONENT_BG font-semibold text-lg p-1 rounded-md">
