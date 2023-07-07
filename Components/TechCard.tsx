@@ -159,7 +159,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
       key={key}
     >
       <div className="flex justify-between items-center">
-        <h1 className="bg-MAIN rounded-lg w-fit p-2 text-COMPONENT_BG font-semibold text-xl">
+        <h1 className="bg-MAIN rounded-lg w-fit p-2 text-MAIN_TEXT font-semibold text-xl">
           {tech.name}
         </h1>
         {isLoading ? (
@@ -173,12 +173,12 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
         ) : null}
         {!data ? (
           <AiFillBell
-            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_BG cursor-pointer hover:text-white"
+            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_PRIMARY_BG cursor-pointer hover:text-white"
             onClick={handleAuth}
           />
         ) : (
           <AiFillBell
-            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_BG cursor-pointer hover:text-white"
+            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_PRIMARY_BG cursor-pointer hover:text-white"
             onClick={handleSubscribe}
           />
         )}

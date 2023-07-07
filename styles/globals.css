@@ -4,100 +4,33 @@
 
 /* utility Classes */
 
-.custom-list{
-  color: #1E1E24;
-  background-color: #E54B4B;
+.custom-list {
+  color: #121212;
+  background-color: white;
   padding-inline: 1rem;
-  padding-block: .25rem;
+  padding-block: 0.25rem;
   border-radius: 10px;
   font-weight: 600;
   font-size: 1.125rem;
   cursor: pointer;
 }
 
-.custom-list-N{
-    color: #F7EBE8;
-border: 1px #E54B4B solid;
+.custom-list-N {
+  color: #121212;
+  border: 1px #e54b4b solid;
   padding-inline: 1rem;
-  padding-block: .25rem;
+  padding-block: 0.25rem;
   border-radius: 10px;
   font-weight: 600;
   font-size: 1.125rem;
   cursor: pointer;
 }
 
-.eyeIcon{
+.eyeIcon {
   position: absolute;
   color: black;
   top: 65%;
   right: 5%;
   font-size: 1.2rem;
   cursor: pointer;
-}
-
-
-.scroll-list{
-      display: grid;
-    grid-template-columns: repeat(31,20rem);
-    gap: 2rem;
-    overflow-x: scroll; 
-    overflow-y: hidden;  
-    width:90%;
-    scrollbar-width: thin;
-    scroll-behavior:smooth;
-    margin:auto;
-    scrollbar-color: #E54B4B #1E1E24;
-}
-
-.scroll-list::-webkit-scrollbar {
-  scroll-margin-block-start: 1rem;
-  height: 5px;
-}
-
-.scroll-list::-webkit-scrollbar-track {
-  background-color: #1E1E24; /* Background color of the scrollbar track */
-}
-
-.scroll-list::-webkit-scrollbar-thumb {
-  background-color: #E54B4B; /* Color of the scrollbar thumb */
-}
-
-.scroll-list::-webkit-scrollbar-thumb:hover {
-  background-color: #F7EBE8; /* Color of the scrollbar thumb on hover */
-}
-
-.scroll-list {
-
-  scrollbar-width: thin; /* Width of the scrollbar */
-}
-
-.scroll-list::-moz-scrollbar-thumb {
-  background-color: #E54B4B; /* Color of the scrollbar thumb */
-}
-
-.scroll-list::-moz-scrollbar-thumb:hover {
-  background-color: #F7EBE8; /* Color of the scrollbar thumb on hover */
-}
-
-.scroll-list::-moz-scrollbar-track {
-  background-color: #F7EBE8; /* Background color of the scrollbar track */
-}
-
-
-
-.navIcon{
-  position: absolute;
-  cursor: pointer;
-  margin-right: 95%;
-  font-size: 2rem;
-  color: white;
-}
-
-.navIconRight{
-
-    position: absolute;
-    cursor: pointer;
-  margin-left:95%;
-  font-size: 2rem;
-  color: white;
 }

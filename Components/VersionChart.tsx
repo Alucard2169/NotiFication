@@ -65,9 +65,9 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
         </h3>
         <button onClick={toggleOrder} className="text-white mt-4">
           {isAscending ? (
-            <BiUpArrow className="text-COMPONENT_BG text-2xl" />
+            <BiUpArrow className="text-COMPONENT_BG bg-MAIN p-1 rounded-md text-3xl" />
           ) : (
-            <BiDownArrow className="text-COMPONENT_BG text-2xl" />
+            <BiDownArrow className="text-COMPONENT_BG bg-MAIN p-1 rounded-md text-3xl" />
           )}
         </button>
       </div>
@@ -76,7 +76,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
         placeholder="Search version"
         value={searchTerm}
         onChange={handleSearch}
-        className="absolute top-20 right-4 bg-COMPONENT_BG text-MAIN font-semibold px-2 py-1 rounded-md mt-4 placeholder:text-MAIN outline-none focus:outline-white"
+        className="absolute top-20 right-4 bg-MAIN text-COMPONENT_BG font-semibold px-2 py-1 rounded-md mt-4 placeholder:text-COMPONENT_BG outline-none focus:outline-white"
       />
       <div className="grid gap-2 mt-4">
         {truncatedVersions.map((version) => (
@@ -99,7 +99,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
       {visibleVersion < filteredVersions.length && (
         <button
           onClick={handleViewMoreVersions}
-          className="bg-COMPONENT_BG p-2 mt-2 w-1/2 rounded-md text-MAIN font-semibold"
+          className="bg-COMPONENT_PRIMARY_BG p-2 mt-2 w-1/2 rounded-md text-MAIN font-semibold"
         >
           View More
         </button>

@@ -155,18 +155,18 @@ const Profile = () => {
                   key={project.package_id}
                   className="flex flex-col gap-2 bg-MAIN p-2 rounded-md"
                 >
-                  <h1 className="bg-PRIMARY p-1 rounded-md text-COMPONENT_BG font-semibold text-xl">
+                  <h1 className="bg-PRIMARY p-1 rounded-md text-MAIN font-semibold text-xl">
                     {project.project_name}
                   </h1>
                   <p className="text-white font-bold">
                     Platform:{" "}
-                    <span className="bg-PRIMARY text-COMPONENT_BG p-1 rounded-md">
+                    <span className="bg-PRIMARY text-MAIN p-1 rounded-md">
                       {project.platform}
                     </span>
                   </p>
                   <div className="flex justify-between mt-4">
                     <BiSolidBellOff
-                      className="bg-PRIMARY text-COMPONENT_BG p-1 rounded-md text-3xl cursor-pointer"
+                      className="bg-PRIMARY text-MAIN p-1 rounded-md text-3xl cursor-pointer"
                       onClick={() => handleUnsubscription(project.package_id)}
                     />
                     <Link
@@ -194,11 +194,11 @@ const Profile = () => {
             <div className="grid gap-4 h-auto">
               {updates.map((update: UpdateProp) => (
                 <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-2 rounded-md">
-                  <span className="bg-PRIMARY text-COMPONENT_BG font-semibold text-lg p-1 rounded-md">
+                  <span className="bg-PRIMARY text-MAIN font-semibold text-lg p-1 rounded-md">
                     {update.project_name}
                   </span>
                   -{update.latest_version} - published{" "}
-                  <span className="bg-PRIMARY text-COMPONENT_BG font-semibold text-sm p-1 rounded-md">
+                  <span className="bg-PRIMARY text-MAIN font-semibold text-sm p-1 rounded-md">
                     {" "}
                     {update.time} days ago
                   </span>

@@ -116,12 +116,12 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
               )}
             </div>
           </div>
-          <span className="bg-PRIMARY p-2 rounded-md font-semibold w-fit text-COMPONENT_PRIMARY_BG">
+          <span className="bg-COMPONENT_PRIMARY_BG p-2 rounded-md font-semibold w-fit text-MAIN">
             {language}
           </span>
           <article className="text-lg text-white font-bold flex flex-col gap-2 bg-PRIMARY p-2 rounded-md w-fit">
             <h2>Description:</h2>{" "}
-            <p className="text-COMPONENT_BG font-semibold">{description}</p>
+            <p className="text-MAIN font-semibold">{description}</p>
           </article>
           <article className="flex flex-col gap-2 bg-PRIMARY p-2 rounded-md w-full">
             <h2 className="text-white font-bold font-bold text-lg">

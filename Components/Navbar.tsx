@@ -31,7 +31,7 @@ const Navbar: FC = () => {
       <ul className="flex gap-8 items-center">
         {!data && (
           <li
-            className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+            className="px-2 py-1  bg-COMPONENT_PRIMARY_BG text-MAIN font-semibold rounded-lg cursor-pointer"
             onClick={() => setState(true)}
           >
             SignUp
@@ -39,7 +39,7 @@ const Navbar: FC = () => {
         )}
         {data && (
           <li
-            className="px-2 py-1 text-white bg-COMPONENT_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+            className="px-2 py-1  bg-COMPONENT_PRIMARY_BG text-MAIN font-semibold rounded-lg cursor-pointer"
             onClick={handleLogout}
           >
             Logout
