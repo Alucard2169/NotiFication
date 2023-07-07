@@ -138,29 +138,29 @@ const Profile = () => {
   }, [projects]);
 
   return (
-    <div className="p-8 flex gap-8">
+    <div className="p-4 sm:p-8 flex flex-col sm:flex-row gap-8">
       <section className="bg-PRIMARY flex flex-col gap-6 p-4 rounded-md h-fit">
         <h1 className="text-COMPONENT_BG bg-MAIN py-1 px-2 font-bold text-2xl rounded-md">
           {data?.username}
         </h1>
         <h3 className="text-white font-semibold text-xl">{data?.email}</h3>
       </section>
-      <div className="w-full flex gap-2">
-        <section className="bg-PRIMARY p-2 rounded-md w-1/2">
+      <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
+        <section className="bg-PRIMARY p-1 sm:p-2 rounded-md w-full  sm:w-1/2">
           <h2 className="text-white font-bold text-2xl">My Projects</h2>
           {projects !== null && projects.length !== 0 ? (
-            <div className="grid grid-cols-3 gap-6 mt-8 h-auto">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-8 h-auto">
               {projects.map((project) => (
                 <div
                   key={project.package_id}
-                  className="flex flex-col gap-2 bg-MAIN p-2 rounded-md"
+                  className="flex flex-col gap-1 sm:gap-2 bg-MAIN p-2 rounded-md"
                 >
-                  <h1 className="bg-PRIMARY p-1 rounded-md text-MAIN font-semibold text-xl">
+                  <h1 className="bg-PRIMARY p-1 rounded-md text-MAIN font-semibold  text-lg sm:text-xl">
                     {project.project_name}
                   </h1>
                   <p className="text-white font-bold">
                     Platform:{" "}
-                    <span className="bg-PRIMARY text-MAIN p-1 rounded-md">
+                    <span className="bg-PRIMARY text-MAIN p-1 rounded-md text-sm sm:text-xl ">
                       {project.platform}
                     </span>
                   </p>
@@ -186,23 +186,37 @@ const Profile = () => {
             </div>
           )}
         </section>
-        <section className="bg-PRIMARY p-2 rounded-md w-1/2 flex flex-col gap-8">
+        <section className="bg-PRIMARY p-2 rounded-md w-full sm:w-1/2 flex flex-col gap-8">
           <div className="flex justify-between items-center">
             <h2 className="text-white font-bold text-2xl">Updates</h2>
           </div>
           {updates ? (
             <div className="grid gap-4 h-auto">
-              {updates.map((update: UpdateProp) => (
-                <p className="bg-MAIN text-COMPONENT_PRIMARY_BG p-2 rounded-md">
-                  <span className="bg-PRIMARY text-MAIN font-semibold text-lg p-1 rounded-md">
-                    {update.project_name}
-                  </span>
-                  -{update.latest_version} - published{" "}
-                  <span className="bg-PRIMARY text-MAIN font-semibold text-sm p-1 rounded-md">
-                    {" "}
-                    {update.time} days ago
-                  </span>
-                </p>
+              {updates.map((update: UpdateProp, i: number) => (
+                <div
+                  key={i}
+                  className="flex flex-col gap-1 sm:gap-2 bg-MAIN rounded-md p-1 sm:p-2"
+                >
+                  <p className="bg-COMPONENT_BG p-1 rounded-md font-medium w-fit">
+                    Package:{" "}
+                    <span className="bg-MAIN p-1 rounded-md text-lg font-semibold text-COMPONENT_PRIMARY_BG">
+                      {update.project_name}
+                    </span>
+                  </p>
+                  <p className="bg-COMPONENT_BG p-1 rounded-md font-medium w-fit">
+                    Version:{" "}
+                    <span className="bg-MAIN p-1 rounded-md text-sm font-semibold text-white">
+                      {update.latest_version}
+                    </span>
+                  </p>
+                  <p className="bg-COMPONENT_BG p-1 rounded-md font-medium w-fit">
+                    Time:{" "}
+                    <span className="bg-MAIN p-1 rounded-md text-sm font-semibold text-white">
+                      {update.time}
+                    </span>{" "}
+                    Days ago
+                  </p>
+                </div>
               ))}
             </div>
           ) : (

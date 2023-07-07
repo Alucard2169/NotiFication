@@ -117,11 +117,11 @@ const Auth: FC = () => {
       }`}
     >
       <AiFillCloseCircle
-        className="absolute text-COMPONENT_BG text-3xl top-1/4 right-1/3 cursor-pointer hover:text-white"
+        className="absolute text-COMPONENT_BG text-3xl  lg:top-1/4 top-28 right-1/3 cursor-pointer hover:text-white"
         onClick={handleAuthFormVisibility}
       />
       <form
-        className="flex flex-col gap-8 items-center w-1/4 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
+        className="flex flex-col gap-8 items-center md:w-1/4 sm:w-80 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
         onSubmit={(e) => {
           formContent === "sign" ? handleSignUp(e) : handleLogin(e);
         }}

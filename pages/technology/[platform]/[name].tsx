@@ -86,8 +86,8 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
     versions,
   } = techData;
   return (
-    <div className="py-4 px-8 flex gap-8">
-      <div className="w-1/2">
+    <div className="py-4 px-4 sm:px-8 flex flex-col gap-8 sm:flex-row">
+      <div className="w-full sm:w-1/2">
         <section className="flex flex-col gap-4">
           <div className="flex gap-4 items-center">
             <h1 className="text-3xl text-white bg-PRIMARY p-2 rounded-md w-fit font-bold">
@@ -127,7 +127,7 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
             <h2 className="text-white font-bold font-bold text-lg">
               Keywords:
             </h2>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-1 sm:gap-2 flex-wrap">
               {keywords.map((key, i) => (
                 <p
                   key={i}
@@ -138,22 +138,22 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
               ))}
             </div>
           </article>
-          <ul className="flex gap-4 bg-PRIMARY p-2 w-fit rounded-md mt-2 items-center">
+          <ul className="flex gap-4 bg-PRIMARY p-2 w-fit rounded-md mt-2 items-center flex-wrap">
             {contributions_count && (
-              <li className="bg-MAIN p-2 rounded-md flex gap-2 items-center text-white font-semibold">
-                <BsFillPeopleFill className="text-3xl text-COMPONENT_BG" />
+              <li className="bg-MAIN p-1 sm:p-2 rounded-md flex gap-2 items-center text-white font-semibold">
+                <BsFillPeopleFill className="text-lg sm:text-3xl text-COMPONENT_BG" />
                 {addCommasToNumber(contributions_count)}
               </li>
             )}
-            <li className="bg-MAIN p-2 rounded-md flex gap-2 items-center text-white font-semibold">
-              <BiGitRepoForked className="text-3xl text-COMPONENT_BG" />{" "}
+            <li className="bg-MAIN p-1 sm:p-2 rounded-md flex gap-2 items-center text-white font-semibold">
+              <BiGitRepoForked className="text-lg sm:text-3xl text-COMPONENT_BG" />{" "}
               {addCommasToNumber(forks)}
             </li>
-            <li className="bg-MAIN p-2 rounded-md flex gap-2 items-center text-white font-semibold">
-              <FiStar className="text-3xl text-COMPONENT_BG" />
+            <li className="bg-MAIN p-1 sm:p-2 rounded-md flex gap-2 items-center text-white font-semibold">
+              <FiStar className="text-lg sm:text-3xl text-COMPONENT_BG" />
               {addCommasToNumber(stars)}
             </li>
-            <li className="bg-MAIN p-2 rounded-md flex gap-2 items-center text-white font-semibold">
+            <li className="bg-MAIN p-1 sm:p-2 rounded-md flex gap-2 items-center text-white font-semibold">
               License: <span className="text-COMPONENT_BG">{licenses}</span>
             </li>
           </ul>
@@ -168,7 +168,10 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
         </section>
 
         <ul className="mt-4 flex flex-col gap-3">
-          <h3 className="text-white font-bold text-2xl">Releases:</h3>
+          <hr />
+          <h3 className="text-white font-bold text-xl sm:text-2xl">
+            Releases:
+          </h3>
           <li className="bg-PRIMARY w-full flex flex-col gap-2 p-1 rounded-md">
             <p className="text-white font-semibold text-md">
               Latest Stable Release Number:{" "}

@@ -55,7 +55,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
   };
 
   return (
-    <div className="relative w-1/2 bg-PRIMARY rounded-md p-4">
+    <div className="relative w-full sm:w-1/2 bg-PRIMARY rounded-md p-4">
       <div className="flex w-full justify-between items-center">
         <h3 className="text-white font-semibold text-2xl">
           Version{" "}
@@ -76,13 +76,13 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
         placeholder="Search version"
         value={searchTerm}
         onChange={handleSearch}
-        className="absolute top-20 right-4 bg-MAIN text-COMPONENT_BG font-semibold px-2 py-1 rounded-md mt-4 placeholder:text-COMPONENT_BG outline-none focus:outline-white"
+        className="absolute top-16 sm:top-20 right-4 bg-MAIN text-COMPONENT_BG font-semibold px-2 py-1 rounded-md mt-4 placeholder:text-COMPONENT_BG outline-none focus:outline-white"
       />
-      <div className="grid gap-2 mt-4">
+      <div className="grid gap-2  mt-20 sm:mt-4">
         {truncatedVersions.map((version) => (
           <div
             key={version.number}
-            className="bg-MAIN py-1 px-2 rounded-md w-1/2 flex flex-col gap-2"
+            className="bg-MAIN py-1 px-2 rounded-md w-full sm:w-1/2 flex flex-col gap-2"
           >
             <h5 className="text-white font-semibold text-md">
               {version.number}
@@ -99,7 +99,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
       {visibleVersion < filteredVersions.length && (
         <button
           onClick={handleViewMoreVersions}
-          className="bg-COMPONENT_PRIMARY_BG p-2 mt-2 w-1/2 rounded-md text-MAIN font-semibold"
+          className="bg-COMPONENT_PRIMARY_BG p-2 mt-2  w-full sm:w-1/2 rounded-md text-MAIN font-semibold"
         >
           View More
         </button>

@@ -21,7 +21,7 @@ const Navbar: FC = () => {
   };
 
   return (
-    <nav className="w-screen lg:px-8 py-2 sm:px-4 flex justify-between items-center bg-PRIMARY">
+    <nav className="w-screen py-2 px-4  md:px-8  flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
         <li className={`${"custom-list"} transition-all duration-200`}>
           <Link href="/">notify</Link>

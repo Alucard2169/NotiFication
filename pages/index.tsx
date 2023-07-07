@@ -39,7 +39,7 @@ const Tech: FC = () => {
             />
           </label>
         </form>
-        <p className="w-1/2 text-center text-white ">
+        <p className=" sm:w-full md:w-1/2  text-center   text-white ">
           notify is a tool that let the user search for and subscribing to
           packages/libraries, enabling users to receive real-time notifications
           regarding updates and upgrades.
