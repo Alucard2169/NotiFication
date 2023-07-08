@@ -38,7 +38,6 @@ export default async function handler(
       last_date,
     } = requestData;
 
-    console.log(requestData);
     // store the package into the database
     const createdPackage = await prisma.packages.create({
       data: {

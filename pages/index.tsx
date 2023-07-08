@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useRouter } from "next/router";
@@ -7,6 +7,16 @@ import Head from "next/head";
 const Tech: FC = () => {
   const router = useRouter();
   const [name, setName] = useState<string>("");
+
+  // useEffect(() => {
+  //   const delLete = async () => {
+  //     const response = await fetch("/api/unsubscribe")
+  //     const data = await response.json()
+
+  //     console.log(data)
+  //   }
+  //   delLete()
+  // },[])
 
   const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
