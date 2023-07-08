@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const usernameCheck = await prisma.users.findFirst({
       where: {
-        username,
+        username:username,
       },
     });
 

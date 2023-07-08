@@ -8,14 +8,14 @@ import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-        <DialogContextProvider>
     <AuthContextProvider>
         <UserContextProvider>
+      <DialogContextProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
+    </DialogContextProvider>
         </UserContextProvider>
       </AuthContextProvider>
-    </DialogContextProvider>
   );
 }
