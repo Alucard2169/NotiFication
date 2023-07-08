@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from "react";
 import wait from "@/public/wait.gif";
 import { v4 as uuidv4 } from "uuid";
-import { DialogContextProps, dialogContext } from "@/context/DialogContext";
+import { DialogContextProps, DialogContext } from "@/context/DialogContext";
 import Image from "next/image";
 import { FiGlobe, FiStar, FiPackage } from "react-icons/fi";
 import { AiFillGithub, AiFillInfoCircle, AiFillBell } from "react-icons/ai";
@@ -69,7 +69,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
   const { data } = userContextValue;
   const authContextValue = useContext(authContext) as AuthContextProps;
   const { setMessage, setDialogState } = useContext(
-    dialogContext
+    DialogContext
   ) as DialogContextProps;
   const { setState } = authContextValue;
   const addCommasToNumber = (number: number): string => {

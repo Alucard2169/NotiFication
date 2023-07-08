@@ -1,12 +1,11 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useContext,useState,useEffect } from "react";
 import Auth from "./Auth";
 import Navbar from "./Navbar";
 import Loading from "./Loading";
-import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import DialogBox from "./DialogBox";
-import { DialogContextProps, dialogContext } from "@/context/DialogContext";
+import { DialogContext, DialogContextProps } from "@/context/DialogContext";
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,7 +14,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
-  const { dialogState } = useContext(dialogContext) as DialogContextProps;
+  const { dialogState } = useContext(DialogContext) as DialogContextProps;
 
   useEffect(() => {
     const handleStart = () => {
@@ -36,6 +35,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       router.events.off("routeChangeError", handleComplete);
     };
   }, [router]);
+
   return (
     <div className="bg-MAIN w-screen h-screen overflow-x-hidden">
       <Head>

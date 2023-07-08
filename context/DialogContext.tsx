@@ -14,7 +14,7 @@ export interface DialogContextProps {
   setMessage: Dispatch<SetStateAction<string | null>>;
 }
 
-const dialogContext = createContext<DialogContextProps | null>(null);
+const DialogContext = createContext<DialogContextProps | null>(null);
 
 interface DialogContextProviderProps {
   children: ReactNode;
@@ -41,10 +41,10 @@ const DialogContextProvider = ({ children }: DialogContextProviderProps) => {
   }, [dialogState]);
 
   return (
-    <dialogContext.Provider value={contextValue}>
+    <DialogContext.Provider value={contextValue}>
       {children}
-    </dialogContext.Provider>
+    </DialogContext.Provider>
   );
 };
 
-export { dialogContext, DialogContextProvider };
+export { DialogContext, DialogContextProvider };

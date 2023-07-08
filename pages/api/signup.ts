@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { hash } from 'bcryptjs';
-import validator from 'validator';
-import jwt from 'jsonwebtoken'
-import { setCookie } from "cookies-next"; 
+import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { hash } from "bcryptjs";
+import validator from "validator";
+import jwt from "jsonwebtoken";
+import { setCookie } from "cookies-next";
 
 const prisma = new PrismaClient();
 
@@ -35,11 +35,31 @@ export default async function handler(
     const user_password = await hash(password, saltRounds);
 
     if (!validator.isEmail(email)) {
-      throw new Error('Must be a valid email');
+      throw new Error("Must be a valid email");
     }
 
     if (!validator.isStrongPassword(password)) {
-      throw new Error('Password not strong enough');
+      throw new Error("Password not strong enough");
+    }
+
+    // Check if username or email already exists
+    const existingUser = await prisma.users.findFirst({
+      where: {
+        OR: [{ username }, { email }],
+      },
+      select: {
+        username: true,
+        email: true,
+      },
+    });
+
+    if (existingUser) {
+      if (existingUser.username === username) {
+        throw new Error("Username already exists");
+      }
+      if (existingUser.email === email) {
+        throw new Error("Email already exists");
+      }
     }
 
     const user = await prisma.users.create({
@@ -50,44 +70,29 @@ export default async function handler(
       },
     });
 
-    const findUser = await prisma.users.findUnique({
-      where: {
-        user_id: user.user_id,
-      },
-    });
-
     const userData: Data = {
-      user_id: findUser?.user_id ?? null,
-      username: findUser?.username ?? null,
-      email: findUser?.email ?? null,
+      user_id: user.user_id,
+      username: user.username,
+      email: user.email,
     };
 
-
-
-    
-      const token = jwt.sign({ userId: userData.user_id }, process.env.JWT_SECRET || '');
-      // Set cookie with a max age of 4 days
-      setCookie("token", token, {
-        req,
-        res,
-        maxAge: 4 * 24 * 60 * 60, // 4 days in seconds
-        path: "/",
-        secure: process.env.NODE_ENV === "production", // Set to true in production
-        httpOnly: true,
-        sameSite: "strict",
-      });
+    const token = jwt.sign(
+      { userId: userData.user_id },
+      process.env.JWT_SECRET || ""
+    );
+    // Set cookie with a max age of 4 days
+    setCookie("token", token, {
+      req,
+      res,
+      maxAge: 4 * 24 * 60 * 60, // 4 days in seconds
+      path: "/",
+      secure: process.env.NODE_ENV === "production", // Set to true in production
+      httpOnly: true,
+      sameSite: "strict",
+    });
 
     res.status(200).json(userData);
   } catch (err: any) {
-    if (err.code === 'P2002') {
-      if (err.meta.target === 'users_username_key') {
-        return res.status(501).json({ error: 'Username Already In Use' } as ErrorResponse);
-      }
-      if (err.meta.target === 'users_email_key') {
-        return res.status(501).json({ error: 'Email Already In Use' } as ErrorResponse);
-      }
-    } else {
-      return res.status(501).json({ error: err.message } as ErrorResponse);
-    }
+    return res.status(500).json({ error: err.message } as ErrorResponse);
   }
 }
