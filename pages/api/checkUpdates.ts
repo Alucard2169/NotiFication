@@ -40,14 +40,19 @@ export default async function handler(
 
     const user = await prisma.users.findUnique({
       where: { user_id: userId },
-      include: { packages: true },
     });
+
+    const packages = await prisma.packages.findMany({
+      where: {
+        user_id: userId,
+      }
+    })
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const subscribedProjects: Project[] = user.packages as Project[];
+    const subscribedProjects: Project[] = packages as Project[];
 
     const updateMessages: responseMessage[] = []; // Store update messages for each project
 

@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model users {
@@ -12,7 +13,7 @@ model users {
   username      String     @unique @db.VarChar(30)
   email         String     @unique @db.VarChar(60)
   user_password String     @db.VarChar(60)
-  packages      packages[]
+
 }
 
 model packages {
@@ -23,7 +24,4 @@ model packages {
   notification    Boolean? @default(false)
   current_version String?  @db.VarChar(60)
   last_date       String?  @db.VarChar(30)
-  users           users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "packages_ibfk_1")
-
-  @@index([user_id], map: "user_id")
 }
