@@ -29,7 +29,7 @@ const Auth: FC = () => {
     setEmail("");
     setState(false);
     setFormContent("login");
-    setIsLoading(true)
+    setIsLoading(false)
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
