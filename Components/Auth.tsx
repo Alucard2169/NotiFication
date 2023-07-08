@@ -20,7 +20,8 @@ const Auth: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  console.log(state);
+  const [isLoading,setIsLoading] = useState<boolean>(false)
+
   const resetForm = () => {
     setError(null);
     setUsername("");
@@ -28,6 +29,7 @@ const Auth: FC = () => {
     setEmail("");
     setState(false);
     setFormContent("login");
+    setIsLoading(true)
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +63,7 @@ const Auth: FC = () => {
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
@@ -76,10 +79,11 @@ const Auth: FC = () => {
       } else {
         // Handle login error
         const errorData = await response.json();
-        console.log(errorData);
+        setIsLoading(false)
         setError(errorData.error);
       }
     } catch (error) {
+      setIsLoading(false)
       console.error("An error occurred during login:", error);
     }
   };
@@ -87,6 +91,7 @@ const Auth: FC = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -102,10 +107,11 @@ const Auth: FC = () => {
       } else {
         // Handle login error
         const errorData = await response.json();
-        console.log(errorData);
+        setIsLoading(false)
         setError(errorData.error);
       }
     } catch (error) {
+      setIsLoading(false)
       console.error("An error occurred during login:", error);
     }
   };
@@ -203,7 +209,9 @@ const Auth: FC = () => {
         <input
           type="submit"
           value="SUBMIT"
-          className="rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer"
+          className={`${
+            isLoading ? "bg-opacity-50 pointer-events-none" : null
+          } rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
         />
 
         <p className="text-white mr-auto">
