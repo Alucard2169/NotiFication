@@ -135,7 +135,7 @@ const Profile = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [projects]);
+  }, []);
 
   return (
     <div className="p-4 sm:p-8 flex flex-col sm:flex-row gap-8">
