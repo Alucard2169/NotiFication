@@ -56,8 +56,8 @@ const Auth: FC = () => {
   };
 
   const handleAuthFormVisibility = (): void => {
-    setState(false);
-    setFormContent("login");
+ 
+    resetForm()
   };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
