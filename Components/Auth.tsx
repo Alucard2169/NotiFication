@@ -13,7 +13,7 @@ const Auth: FC = () => {
   const { state, setState } = contextValue;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { setData } = userContextValue;
-
+  const [isLoading,setIsLoading] = useState<boolean>(false)
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>("login");
   const [username, setUsername] = useState<string>("");
@@ -28,6 +28,7 @@ const Auth: FC = () => {
     setEmail("");
     setState(false);
     setFormContent("login");
+          setIsLoading(false);
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +62,7 @@ const Auth: FC = () => {
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
@@ -78,6 +80,7 @@ const Auth: FC = () => {
         const errorData = await response.json();
         console.log(errorData);
         setError(errorData.error);
+          setIsLoading(false);
       }
     } catch (error) {
       console.error("An error occurred during login:", error);
@@ -87,6 +90,7 @@ const Auth: FC = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+            setIsLoading(true);
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -104,6 +108,7 @@ const Auth: FC = () => {
         const errorData = await response.json();
         console.log(errorData);
         setError(errorData.error);
+              setIsLoading(false);
       }
     } catch (error) {
       console.error("An error occurred during login:", error);
@@ -203,7 +208,7 @@ const Auth: FC = () => {
         <input
           type="submit"
           value="SUBMIT"
-          className="rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer"
+          className={`${isLoading ? 'bg-opacity-50 pointer-event-none':null} rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
         />
 
         <p className="text-white mr-auto">
