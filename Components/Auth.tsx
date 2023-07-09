@@ -20,7 +20,7 @@ const Auth: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  console.log(state);
+
   const resetForm = () => {
     setError(null);
     setUsername("");
@@ -28,7 +28,7 @@ const Auth: FC = () => {
     setEmail("");
     setState(false);
     setFormContent("login");
-          setIsLoading(false);
+    setIsLoading(false);
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,8 +55,7 @@ const Auth: FC = () => {
   };
 
   const handleAuthFormVisibility = (): void => {
-    setState(false);
-    setFormContent("login");
+   resetForm()
   };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {

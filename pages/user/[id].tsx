@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { UserContextProps, userContext } from "@/context/UserContext";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { BiSolidBellOff } from "react-icons/bi";
@@ -25,60 +25,78 @@ const Profile = () => {
   const [isUpdateLoading, setIsUpdateLoading] = useState<boolean>(false);
   const [updates, setUpdates] = useState<any>(null);
 
-  const fetchProjects = async (): Promise<void> => {
-    setIsLoading(true);
+  useEffect(() => {
+    const fetchProjects = async (): Promise<void> => {
+      setIsLoading(true);
 
-    if (data === null) {
-      return;
-    }
+      if (data === null) {
+        return;
+      }
 
-    const { user_id } = data;
+      const { user_id } = data;
 
-    try {
-      const response = await fetch(
-        `${window.location.origin}/api/getProjects?id=${user_id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      try {
+        const response = await fetch(
+          `${window.location.origin}/api/getProjects?id=${user_id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+          console.log(responseData);
+          setProjects(responseData.Data);
         }
-      );
-
-      const responseData = await response.json();
-
-      if (response.ok) {
-        console.log(responseData);
-        setProjects(responseData.Data);
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
 
-    setIsLoading(false);
-  };
+      setIsLoading(false);
+    };
 
-  const getUpdates = async (): Promise<void> => {
-    if (data === null) {
-      return;
+    if (data !== null) {
+      fetchProjects();
     }
-    const { user_id } = data;
-    try {
-      setIsUpdateLoading(true);
-      const response = await fetch(`/api/checkUpdates?id=${user_id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setUpdates(data.messages);
-        setIsUpdateLoading(false);
-      } else {
-        const data = await response.json();
-        console.log(data);
-        setIsUpdateLoading(false);
+  }, [data]);
+
+  useEffect(() => {
+    const getUpdates = async (): Promise<void> => {
+      if (data === null) {
+        return;
       }
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
+      const { user_id } = data;
+      try {
+        setIsUpdateLoading(true);
+        const response = await fetch(`/api/checkUpdates?id=${user_id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setUpdates(data.messages);
+          setIsUpdateLoading(false);
+        } else {
+          const data = await response.json();
+          console.log(data);
+          setIsUpdateLoading(false);
+        }
+      } catch (err: any) {
+        console.log(err);
+      }
+    };
+
+    // Function to be called every 3 hours
+    getUpdates();
+
+    // Interval to call the function every 3 hours
+    const interval = setInterval(getUpdates, 3 * 60 * 60 * 1000); // 3 hours in milliseconds
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data]);
 
   const handleUnsubscription = async (packageId: string): Promise<void> => {
     if (data === null) {
@@ -109,6 +127,8 @@ const Profile = () => {
           }
           return null;
         });
+        // Reset the updates state to null
+        setUpdates(null);
       } else {
         const data = await response.json();
         console.log(data);
@@ -117,25 +137,6 @@ const Profile = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    if (data !== null) {
-      fetchProjects();
-    }
-  }, [data]);
-
-  useEffect(() => {
-    // Function to be called every 3 hours
-    getUpdates();
-
-    //interval to call the function every 3 hours
-    const interval = setInterval(getUpdates, 3 * 60 * 60 * 1000); // 3 hours in milliseconds
-
-    // Clean up the interval when the component is unmounted
-    return () => {
-      clearInterval(interval);
-    };
-  }, [projects]);
 
   return (
     <div className="p-4 sm:p-8 flex flex-col sm:flex-row gap-8">
