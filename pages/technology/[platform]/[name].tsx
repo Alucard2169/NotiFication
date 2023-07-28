@@ -1,54 +1,15 @@
+import VersionChart from "@/Components/VersionChart";
+import { TechData } from "@/types/techInterface";
 import { FC } from "react";
 import {
-  AiOutlineGlobal,
   AiFillGithub,
   AiOutlineDownload,
+  AiOutlineGlobal,
 } from "react-icons/ai";
 import { BiGitRepoForked, BiPackage } from "react-icons/bi";
-import { FiStar } from "react-icons/fi";
 import { BsFillPeopleFill } from "react-icons/bs";
-import VersionChart from "@/Components/VersionChart";
-import { version } from "os";
-import { versions } from "process";
+import { FiStar } from "react-icons/fi";
 
-interface TechData {
-  contributions_count: number;
-  dependent_repos_count: number;
-  dependents_count: number;
-  deprecation_reason: null | string;
-  description: string; //done
-  forks: number; //done
-  homepage: string; //done
-  keywords: string[]; //done
-  language: string; //done
-  latest_download_url: string; //done
-  latest_release_number: string; //done
-  latest_release_published_at: string; //done
-  latest_stable_release_number: string; //done
-  latest_stable_release_published_at: string; //done
-  license_normalized: boolean;
-  licenses: string; //done
-  name: string; //done
-  normalized_licenses: string[];
-  package_manager_url: string;
-  platform: string; //done
-  rank: number; //done
-  repository_license: string;
-  repository_status: null | string;
-  repository_url: string; //done
-  stars: number; //done
-  status: null | string;
-  versions: versions[];
-}
-
-interface versions {
-  number: string;
-  published_at: string;
-  spdx_expression: string;
-  original_license: string;
-  researched_at: null | string;
-  repository_sources: string[];
-}
 
 interface TechnologyProps {
   techData: TechData;
