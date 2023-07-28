@@ -127,6 +127,8 @@ const Profile = () => {
           }
           return null;
         });
+        // Reset the updates state to null
+        setUpdates(null);
       } else {
         const data = await response.json();
         console.log(data);

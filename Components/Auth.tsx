@@ -13,14 +13,17 @@ const Auth: FC = () => {
   const { state, setState } = contextValue;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { setData } = userContextValue;
-
+  const [isLoading,setIsLoading] = useState<boolean>(false)
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>("login");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+<<<<<<< HEAD
   const [isLoading,setIsLoading] = useState<boolean>(false)
+=======
+>>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
 
   const resetForm = () => {
     setError(null);
@@ -29,7 +32,11 @@ const Auth: FC = () => {
     setEmail("");
     setState(false);
     setFormContent("login");
+<<<<<<< HEAD
     setIsLoading(false)
+=======
+    setIsLoading(false);
+>>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,8 +63,12 @@ const Auth: FC = () => {
   };
 
   const handleAuthFormVisibility = (): void => {
+<<<<<<< HEAD
  
     resetForm()
+=======
+   resetForm()
+>>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
   };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -81,6 +92,7 @@ const Auth: FC = () => {
         const errorData = await response.json();
         setIsLoading(false)
         setError(errorData.error);
+          setIsLoading(false);
       }
     } catch (error) {
       setIsLoading(false)
@@ -91,7 +103,11 @@ const Auth: FC = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       setIsLoading(true)
+=======
+            setIsLoading(true);
+>>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -109,6 +125,7 @@ const Auth: FC = () => {
         const errorData = await response.json();
         setIsLoading(false)
         setError(errorData.error);
+              setIsLoading(false);
       }
     } catch (error) {
       setIsLoading(false)
@@ -209,9 +226,13 @@ const Auth: FC = () => {
         <input
           type="submit"
           value="SUBMIT"
+<<<<<<< HEAD
           className={`${
             isLoading ? "bg-opacity-50 pointer-events-none" : null
           } rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
+=======
+          className={`${isLoading ? 'bg-opacity-50 pointer-event-none':null} rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
+>>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
         />
 
         <p className="text-white mr-auto">
