@@ -1,13 +1,13 @@
-import { FC, useContext, useState } from "react";
-import wait from "@/public/wait.gif";
-import { v4 as uuidv4 } from "uuid";
-import { DialogContextProps, DialogContext } from "@/context/DialogContext";
-import Image from "next/image";
-import { FiGlobe, FiStar, FiPackage } from "react-icons/fi";
-import { AiFillGithub, AiFillInfoCircle, AiFillBell } from "react-icons/ai";
-import Link from "next/link";
-import { UserContextProps, userContext } from "@/context/UserContext";
 import { AuthContextProps, authContext } from "@/context/AuthFormContext";
+import { DialogContext, DialogContextProps } from "@/context/DialogContext";
+import { UserContextProps, userContext } from "@/context/UserContext";
+import wait from "@/public/wait.gif";
+import Image from "next/image";
+import Link from "next/link";
+import { FC, useContext, useState } from "react";
+import { AiFillBell, AiFillGithub, AiFillInfoCircle } from "react-icons/ai";
+import { FiGlobe, FiPackage, FiStar } from "react-icons/fi";
+import { v4 as uuidv4 } from "uuid";
 
 interface TechData {
   contributions_count: number;
@@ -155,7 +155,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
 
   return (
     <div
-      className="p-2 rounded-md flex flex-col gap-2 lg:w-96 bg-PRIMARY sm:w-full"
+      className="p-2 rounded-md flex flex-col gap-2 lg:w-96 border border-PRIMARY border-2 sm:w-full"
       key={key}
     >
       <div className="flex justify-between items-center">
