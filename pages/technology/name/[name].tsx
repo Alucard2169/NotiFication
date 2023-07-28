@@ -1,3 +1,4 @@
+import FilterBar from "@/Components/FilterBar";
 import TechCard from "@/Components/TechCard";
 import { FC, useState } from "react";
 
@@ -69,6 +70,7 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
 
   return (
     <div className="relative w-screen h-ch mt-8 sm:mt-8">
+      <FilterBar/>
       {data.length === 0 ? (
         <p className="text-center  p-8  text-COMPONENT_BG font-semibold text-3xl">
           No Data
