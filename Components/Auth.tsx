@@ -1,19 +1,25 @@
-import { FC, useContext, useState } from "react";
-
-import { AuthContextProps, authContext } from "@/context/AuthFormContext";
 import { UserContextProps, userContext } from "@/context/UserContext";
+import { Dispatch, FC, SetStateAction, useContext, useState } from "react";
 import {
   AiFillCloseCircle,
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 
-const Auth: FC = () => {
-  const contextValue = useContext(authContext) as AuthContextProps;
-  const { state, setState } = contextValue;
+interface AuthFormStateProps {
+  state: StateProps;
+}
+
+interface StateProps {
+  formState: boolean;
+  setFormState: Dispatch<SetStateAction<boolean>>;
+}
+
+const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
+  const { formState, setFormState } = state;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { setData } = userContextValue;
-  const [isLoading,setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const [formContent, setFormContent] = useState<string>("login");
   const [username, setUsername] = useState<string>("");
@@ -21,20 +27,14 @@ const Auth: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
- 
-
   const resetForm = () => {
     setError(null);
     setUsername("");
     setPassword("");
     setEmail("");
-    setState(false);
+    setFormState(false);
     setFormContent("login");
-
-    setIsLoading(false)
-
     setIsLoading(false);
-
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,15 +61,13 @@ const Auth: FC = () => {
   };
 
   const handleAuthFormVisibility = (): void => {
-
-    resetForm()
-
+    resetForm();
   };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
@@ -83,23 +81,21 @@ const Auth: FC = () => {
         setData(data);
         resetForm();
       } else {
-        // Handle login error
+        // Handle signup error
         const errorData = await response.json();
-        setIsLoading(false)
+        setIsLoading(false);
         setError(errorData.error);
-          setIsLoading(false);
       }
     } catch (error) {
-      setIsLoading(false)
-      console.error("An error occurred during login:", error);
+      setIsLoading(false);
+      console.error("An error occurred during signup:", error);
     }
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-
-            setIsLoading(true);
+      setIsLoading(true);
 
       const response = await fetch("/api/login", {
         method: "POST",
@@ -116,12 +112,11 @@ const Auth: FC = () => {
       } else {
         // Handle login error
         const errorData = await response.json();
-        setIsLoading(false)
+        setIsLoading(false);
         setError(errorData.error);
-              setIsLoading(false);
       }
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
       console.error("An error occurred during login:", error);
     }
   };
@@ -129,7 +124,7 @@ const Auth: FC = () => {
   return (
     <div
       className={`fixed z-50 bg-black w-screen h-screen  flex justify-center items-center ${
-        !state ? "hidden" : null
+        !formState ? "hidden" : null
       }`}
     >
       <AiFillCloseCircle
@@ -138,9 +133,7 @@ const Auth: FC = () => {
       />
       <form
         className="flex flex-col gap-8 items-center md:w-1/4 sm:w-80 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
-        onSubmit={(e) => {
-          formContent === "sign" ? handleSignUp(e) : handleLogin(e);
-        }}
+        onSubmit={formContent === "sign" ? handleSignUp : handleLogin}
       >
         {error && (
           <p className="rounded-full py-1 bg-red-700 w-full text-center text-white font-semibold">
@@ -219,9 +212,9 @@ const Auth: FC = () => {
         <input
           type="submit"
           value="SUBMIT"
-
-          className={`${isLoading ? 'bg-opacity-50 pointer-event-none':null} rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
-
+          className={`${
+            isLoading ? "bg-opacity-50 pointer-event-none" : null
+          } rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
         />
 
         <p className="text-white mr-auto">
@@ -254,4 +247,4 @@ const Auth: FC = () => {
   );
 };
 
-export default Auth;
+export default AuthForm;

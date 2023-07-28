@@ -1,4 +1,3 @@
-import { AuthContextProps, authContext } from "@/context/AuthFormContext";
 import { DialogContext, DialogContextProps } from "@/context/DialogContext";
 import { UserContextProps, userContext } from "@/context/UserContext";
 import wait from "@/public/wait.gif";
@@ -67,11 +66,11 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data } = userContextValue;
-  const authContextValue = useContext(authContext) as AuthContextProps;
+ 
   const { setMessage, setDialogState } = useContext(
     DialogContext
   ) as DialogContextProps;
-  const { setState } = authContextValue;
+ 
   const addCommasToNumber = (number: number): string => {
     return number.toLocaleString();
   };
@@ -149,9 +148,6 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
     }
   };
 
-  const handleAuth = () => {
-    setState(true);
-  };
 
   return (
     <div
@@ -171,12 +167,8 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
             className="ml-auto mr-4 rounded-md"
           />
         ) : null}
-        {!data ? (
-          <AiFillBell
-            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_PRIMARY_BG cursor-pointer hover:text-white"
-            onClick={handleAuth}
-          />
-        ) : (
+        {data && (
+          
           <AiFillBell
             className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_PRIMARY_BG cursor-pointer hover:text-white"
             onClick={handleSubscribe}

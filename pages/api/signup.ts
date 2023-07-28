@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { hash } from "bcryptjs";
-import validator from "validator";
-import jwt from "jsonwebtoken";
 import { setCookie } from "cookies-next";
+import jwt from "jsonwebtoken";
+import type { NextApiRequest, NextApiResponse } from "next";
+import validator from "validator";
 
 const prisma = new PrismaClient();
 
@@ -51,11 +51,8 @@ export default async function handler(
         username: true,
         email: true,
       },
-<<<<<<< HEAD
+
     });
-=======
-    });   
->>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
 
     if (existingUser) {
       if (existingUser.username === username) {
@@ -97,12 +94,8 @@ export default async function handler(
 
     res.status(200).json(userData);
   } catch (err: any) {
-<<<<<<< HEAD
+
     return res.status(500).json({ error: err.message } as ErrorResponse);
-=======
-   
-      return res.status(501).json({ error: err.message } as ErrorResponse);
-    
->>>>>>> 79026b5eb8ecdc62410e1858edb7d74624ad9edc
+
   }
 }

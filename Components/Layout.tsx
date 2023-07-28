@@ -1,11 +1,11 @@
-import React, { FC, ReactNode, useContext,useState,useEffect } from "react";
-import Auth from "./Auth";
-import Navbar from "./Navbar";
-import Loading from "./Loading";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import DialogBox from "./DialogBox";
 import { DialogContext, DialogContextProps } from "@/context/DialogContext";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { FC, ReactNode, useContext, useEffect, useState } from "react";
+import AuthForm from "./Auth";
+import DialogBox from "./DialogBox";
+import Loading from "./Loading";
+import Navbar from "./Navbar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +13,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
+  const [formState,setFormState] = useState(false)
   const router = useRouter();
   const { dialogState } = useContext(DialogContext) as DialogContextProps;
 
@@ -46,8 +47,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       ) : (
         <>
           {dialogState && <DialogBox />}
-          <Auth />
-          <Navbar />
+            <AuthForm state={{ formState, setFormState }} />
+            <Navbar stateProps={{ formState, setFormState }} />
           {children}
         </>
       )}

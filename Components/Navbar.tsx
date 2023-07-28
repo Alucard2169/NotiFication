@@ -1,15 +1,21 @@
-import { useRouter } from "next/router";
-
-import Image from "next/image";
-import pfp from "@/public/1.jpg";
-import { FC, useContext } from "react";
-import Link from "next/link";
 import { UserContextProps, userContext } from "@/context/UserContext";
-import { AuthContextProps, authContext } from "@/context/AuthFormContext";
+import pfp from "@/public/1.jpg";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Dispatch, FC, SetStateAction, useContext } from "react";
 
-const Navbar: FC = () => {
-  const authContextValue = useContext(authContext) as AuthContextProps;
-  const { setState } = authContextValue;
+
+
+interface NavbarProps {
+  stateProps: {
+    formState: boolean;
+    setFormState: Dispatch<SetStateAction<boolean>>;
+  };
+}
+
+const Navbar: FC<NavbarProps> = ({ stateProps }) => {
+  const { formState, setFormState } = stateProps;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data, setData } = userContextValue;
   const router = useRouter();
@@ -32,7 +38,7 @@ const Navbar: FC = () => {
         {!data && (
           <li
             className="px-2 py-1  bg-COMPONENT_PRIMARY_BG text-MAIN font-semibold rounded-lg cursor-pointer"
-            onClick={() => setState(true)}
+            onClick={() => setFormState(true)}
           >
             SignUp
           </li>
