@@ -1,14 +1,6 @@
+import { Version } from "@/types/techInterface";
 import React, { useState } from "react";
-import { BiUpArrow, BiDownArrow } from "react-icons/bi";
-
-interface Version {
-  number: string;
-  published_at: string;
-  spdx_expression: string;
-  original_license: string;
-  researched_at: null | string;
-  repository_sources: string[];
-}
+import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
 const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
   const [isAscending, setIsAscending] = useState(true);

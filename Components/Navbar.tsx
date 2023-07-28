@@ -15,7 +15,7 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ stateProps }) => {
-  const { formState, setFormState } = stateProps;
+  const {  setFormState } = stateProps;
   const userContextValue = useContext(userContext) as UserContextProps;
   const { data, setData } = userContextValue;
   const router = useRouter();

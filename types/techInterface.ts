@@ -29,7 +29,7 @@ export interface TechData {
 }
 
 
-interface Version {
+export interface Version {
   number: string;
   published_at: string;
   spdx_expression: string;

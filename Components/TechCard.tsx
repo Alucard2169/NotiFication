@@ -17,15 +17,6 @@ interface TechProps {
   key: number;
 }
 
-interface handleStoreProps {
-  package_id: string;
-  user_id: number;
-  project_name: string;
-  platform: string;
-  notification: boolean;
-  current_version: string;
-  last_date: string;
-}
 
 const TechCard: FC<TechProps> = ({ tech, key }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
