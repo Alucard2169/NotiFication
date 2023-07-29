@@ -13,13 +13,14 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
   const [data, setData] = useState<TechData[]>(techData);
   const [showAll, setShowAll] = useState<Boolean>(false);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [sortOption, setSortOption] = useState<string>('');
 
-  const handleViewMore = async () => {
+  const handleViewMore = async (sortBy:string) => {
     try {
       const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
       setIsLoading(true);
       const techResponse = await fetch(
-        `https://libraries.io/api/search?q=${name}&api_key=${apiKey}`
+        `https://libraries.io/api/search?q=${name}&api_key=${apiKey}&sort=${sortBy}`
       );
       const techData = await techResponse.json();
 
@@ -31,9 +32,15 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
     }
   };
 
+
+ const handleSortFunctionality = (sortBy: string) => {
+   handleViewMore(sortBy);
+   setSortOption(sortBy); // Set the selected sorting option in state
+ };
+
   return (
     <div className="relative w-screen h-ch mt-8 sm:mt-8">
-      <FilterBar/>
+      <FilterBar handleSort={handleSortFunctionality} />
       {data.length === 0 ? (
         <p className="text-center  p-8  text-COMPONENT_BG font-semibold text-3xl">
           No Data
@@ -45,7 +52,7 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
           ))}
           {!showAll && (
             <button
-              onClick={handleViewMore}
+              onClick={() => handleViewMore(sortOption)} // Pass the sortOption to handleViewMore
               className={`${
                 isLoading
                   ? "pointer-events-none opacity-50 cursor-not-allowed"

@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import React, {
-  FC,
-  createContext,
-  ReactNode,
-  useState,
-  SetStateAction,
+import {
   Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  createContext,
   useEffect,
+  useState,
 } from "react";
 
 interface StateProps {
@@ -40,11 +40,13 @@ const UserContextProvider: FC<Props> = ({ children }) => {
       try {
         const response = await fetch(`/api/initial`);
         if (!response.ok) {
-          router.push("/");
-          throw new Error("Initial data fetch failed");
+          setData(null)
         }
-        const data = await response.json();
-        setData(data);
+        else {
+          const data = await response.json();
+          setData(data);
+        }
+        
       } catch (error) {
         console.error(error);
       }
