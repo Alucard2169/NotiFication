@@ -11,8 +11,8 @@ interface TechProps {
 
 const SearchResult: FC<TechProps> = ({ techData, name }) => {
   const [data, setData] = useState<TechData[]>(techData);
-  const [showAll, setShowAll] = useState<Boolean>(false);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState<string>('');
 
   const handleViewMore = async (sortBy:string) => {
@@ -40,7 +40,7 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
 
   return (
     <div className="relative w-screen h-ch mt-8 sm:mt-8">
-      <FilterBar handleSort={handleSortFunctionality} />
+      <FilterBar handleSort={handleSortFunctionality} loadingState={isLoading} />
       {data.length === 0 ? (
         <p className="text-center  p-8  text-COMPONENT_BG font-semibold text-3xl">
           No Data

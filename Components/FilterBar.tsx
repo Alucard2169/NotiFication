@@ -2,8 +2,10 @@ import { useState } from "react";
 
 const FilterBar = ({
   handleSort,
+  loadingState
 }: {
-  handleSort: (sortBy: string) => void;
+    handleSort: (sortBy: string) => void;
+    loadingState: boolean;
 }) => {
   const [sortDisplay, setSortDisplay] = useState<boolean>(false);
 
@@ -12,7 +14,7 @@ const FilterBar = ({
   };
   return (
     <div className="bg-PRIMARY  w-5/6 mx-auto p-2 rounded-lg">
-      <ul className="flex gap-10">
+      <ul className="flex w-full gap-10">
         <li className="text-white font-bold cursor-pointer hover:bg-white hover:text-PRIMARY transition-all duration-200 rounded-md px-1">
           Filter
         </li>
@@ -47,9 +49,8 @@ const FilterBar = ({
               Rank
             </li>
             <li
-              
               onClick={() => {
-                handleSort("stars")
+                handleSort("stars");
                 handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
@@ -57,56 +58,56 @@ const FilterBar = ({
               Stars
             </li>
             <li
-              
-                onClick={() => {
-                 handleSort("dependents count");
-                handleSortDisplay()
+              onClick={() => {
+                handleSort("dependents count");
+                handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
             >
               Dependents Count
             </li>
             <li
-              
-                onClick={() => {
+              onClick={() => {
                 handleSort("dependents_repo_count");
-                handleSortDisplay()
+                handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
             >
               Dependents Repos Count
             </li>
             <li
-
-                onClick={() => {
-             handleSort("latest_publish_at")
-                handleSortDisplay()
+              onClick={() => {
+                handleSort("latest_publish_at");
+                handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
             >
               Latest Release Published At
             </li>
             <li
-            
-                onClick={() => {
-                handleSort("contribution_count")
-                handleSortDisplay()
+              onClick={() => {
+                handleSort("contribution_count");
+                handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
             >
               Contributions Count
             </li>
             <li
-             
-                onClick={() => {
-                handleSort("created_at")
-                handleSortDisplay()
+              onClick={() => {
+                handleSort("created_at");
+                handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
             >
               Created At
             </li>
           </ul>
+        </li>
+        <li className="ml-auto">
+          {loadingState ? (
+            <span className=" text-white font-semibold">loading...</span>
+          ) : null}
         </li>
       </ul>
     </div>
