@@ -59,7 +59,7 @@ const FilterBar = ({
             </li>
             <li
               onClick={() => {
-                handleSort("dependents count");
+                handleSort("dependents_count");
                 handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
@@ -68,7 +68,7 @@ const FilterBar = ({
             </li>
             <li
               onClick={() => {
-                handleSort("dependents_repo_count");
+                handleSort("dependent_repos_count");
                 handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
@@ -77,7 +77,7 @@ const FilterBar = ({
             </li>
             <li
               onClick={() => {
-                handleSort("latest_publish_at");
+                handleSort("latest_release_published_at");
                 handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
@@ -86,7 +86,7 @@ const FilterBar = ({
             </li>
             <li
               onClick={() => {
-                handleSort("contribution_count");
+                handleSort("contributions_count");
                 handleSortDisplay();
               }}
               className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
