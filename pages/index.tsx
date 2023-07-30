@@ -7,16 +7,24 @@ const Tech: FC = () => {
   const router = useRouter();
   const [name, setName] = useState<string>("");
 
-  // useEffect(() => {
-  //   const delLete = async () => {
-  //     const response = await fetch("/api/unsubscribe")
-  //     const data = await response.json()
+ const purgeDatabase = async () => {
+   const response = await fetch("/api/unsubscribe");
+   const data = await response.json();
+ };
 
-  //     console.log(data)
-  //   }
-  //   delLete()
-  // },[])
+ const schedulePurgeDatabase = () => {
+   // Calculate the time remaining until the next month starts
+   const now = new Date();
+   const nextMonth = new Date(now);
+   nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
+   const timeUntilNextMonth = nextMonth.getTime() - now.getTime();
 
+   // Schedule the purgeDatabase function to run after the calculated time
+   setTimeout(async () => {
+     await purgeDatabase();
+     schedulePurgeDatabase(); // Schedule the next run for the next month
+   }, timeUntilNextMonth);
+ };
   const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     router.push(`/technology/name/${name}`);
