@@ -3,10 +3,11 @@ import { FC } from "react";
 interface SortMenuProps {
     sortDisplay: boolean;
       handleSort: (sortBy: string) => void;
-    handleSortDisplay: () => void;
+  handleSortDisplay: () => void;
+  handleSortType: (sortType: string) => void;
 }
 
-const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDisplay }) => {
+const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDisplay,handleSortType }) => {
  
     return (
       <ul
@@ -18,6 +19,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("");
             handleSortDisplay();
+            handleSortType('Default')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -27,6 +29,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("rank");
             handleSortDisplay();
+            handleSortType('Rank')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -36,6 +39,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("stars");
             handleSortDisplay();
+            handleSortType('Stars')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -45,6 +49,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("dependents_count");
             handleSortDisplay();
+            handleSortType('Dependents Count')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -54,6 +59,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("dependent_repos_count");
             handleSortDisplay();
+            handleSortType('Dependents Repo Count')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -63,6 +69,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("latest_release_published_at");
             handleSortDisplay();
+            handleSortType('Latest Release Published At')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -72,6 +79,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("contributions_count");
             handleSortDisplay();
+            handleSortType('Contributions Count')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
@@ -81,6 +89,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
           onClick={() => {
             handleSort("created_at");
             handleSortDisplay();
+            handleSortType('Created At')
           }}
           className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
