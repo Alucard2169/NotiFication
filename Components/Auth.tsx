@@ -1,10 +1,16 @@
 import { UserContextProps, userContext } from "@/context/UserContext";
 import { Dispatch, FC, SetStateAction, useContext, useState } from "react";
+
 import {
-  AiFillCloseCircle,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
+  Alert,
+  AlertIcon,
+  Button,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Stack,
+} from "@chakra-ui/react";
 
 interface AuthFormStateProps {
   state: StateProps;
@@ -60,9 +66,15 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
     setTogglePassword(!togglePassword);
   };
 
-  const handleAuthFormVisibility = (): void => {
-    resetForm();
-  };
+ const handleAuthFormVisibility = (
+   e: React.MouseEvent<HTMLDivElement>
+ ): void => {
+   const target = e.target as HTMLDivElement;
+
+   if (target.getAttribute("data-set") === "backdrop") {
+     resetForm();
+   }
+ };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -121,124 +133,153 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
     }
   };
 
+
+
   return (
     <div
       className={`fixed z-50 bg-black w-screen h-screen  flex justify-center items-center ${
         !formState ? "hidden" : null
-      }`}
+        }`}
+      onClick={(e) => handleAuthFormVisibility(e)}
+      data-set="backdrop"
     >
-      <AiFillCloseCircle
-        className="absolute text-COMPONENT_BG text-3xl  lg:top-1/4 top-28 right-1/3 cursor-pointer hover:text-white"
-        onClick={handleAuthFormVisibility}
-      />
+    
       <form
-        className="flex flex-col gap-8 items-center md:w-1/4 sm:w-80 border border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
+        className="flex flex-col gap-8 items-center md:w-1/4 sm:w-80 sm:border sm:border-COMPONENT_PRIMARY_BG p-8 rounded-lg"
         onSubmit={formContent === "sign" ? handleSignUp : handleLogin}
       >
         {error && (
-          <p className="rounded-full py-1 bg-red-700 w-full text-center text-white font-semibold">
+          <Alert status="error" borderRadius="full" w="full">
+            <AlertIcon />
             {error}
-          </p>
+          </Alert>
         )}
 
-        <div className="flex flex-col gap-4 w-full">
-          <label
+        <Stack spacing={4} w="full">
+          <FormLabel
             htmlFor="username"
             className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Username
-          </label>
-
-          <input
+          </FormLabel>
+          <Input
             type="text"
+            className="text-PRIMARY font-semibold text-xl"
             id="username"
             name="username"
             onChange={handleUsernameChange}
             value={username}
-            className="rounded-full border-none outline-none px-4 py-2"
+            rounded="full"
+            px={5}
+            py={6}
+            fontSize={20}
             required
           />
-        </div>
 
-        <div className="flex flex-col gap-4 w-full relative">
-          <label
+          <FormLabel
             htmlFor="password"
-            className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+            className="relative text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Password
-          </label>
+          </FormLabel>
 
-          <input
-            type={togglePassword ? "text" : "password"}
-            id="password"
-            name="password"
-            onChange={handlePasswordChange}
-            value={password}
-            className="rounded-full border-none outline-none px-4 py-2 pr-12"
-            required
-          />
-
-          {togglePassword ? (
-            <AiOutlineEyeInvisible
-              className="eyeIcon"
-              onClick={handleTogglePassword}
+          <InputGroup size="md">
+            <Input
+              id="password"
+              type={togglePassword ? "text" : "password"}
+              name="password"
+              onChange={handlePasswordChange}
+              value={password}
+              rounded="full"
+              className="text-PRIMARY font-semibold"
+              pr="4.5rem"
+              px={5}
+              py={6}
+              fontSize={20}
+              required
             />
-          ) : (
-            <AiOutlineEye className="eyeIcon" onClick={handleTogglePassword} />
-          )}
-        </div>
+            <InputRightElement width="3rem" mr={4} mt={1}>
+              <Button h="1.50rem" size="sm" onClick={handleTogglePassword}>
+                {togglePassword ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Stack>
 
         {formContent === "sign" && (
-          <div className={`flex flex-col gap-4 w-full overflow-hidden `}>
-            <label
+          <Stack spacing={4} w="full">
+            <FormLabel
               htmlFor="email"
               className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
             >
               Email
-            </label>
-
-            <input
+            </FormLabel>
+            
+            <Input
               type="email"
+              className="text-PRIMARY font-semibold text-xl"
               id="email"
               name="email"
               onChange={handleEmailChange}
               value={email}
-              className="rounded-full border-none outline-none px-4 py-2"
+              rounded="full"
+              px={5}
+              py={6}
+              fontSize={20}
               required
             />
-          </div>
+          </Stack>
         )}
 
-        <input
+        <Button
           type="submit"
-          value="SUBMIT"
-          className={`${
-            isLoading ? "bg-opacity-50 pointer-event-none" : null
-          } rounded-full bg-COMPONENT_BG px-8 py-2 font-semibold cursor-pointer`}
-        />
+          isLoading={isLoading}
+          rounded="full"
+          className="text-PRIMARY hover:bg-PRIMARY hover:text-MAIN"
+       
+          px={8}
+          py={2}
+          fontWeight="semibold"
+          cursor="pointer"
+         
+          _disabled={{
+            opacity: 0.5,
+            cursor: "not-allowed",
+          }}
+        >
+          SUBMIT
+        </Button>
 
         <p className="text-white mr-auto">
           {formContent === "sign" ? (
             <>
               Already a User -{" "}
-              <button
+              <Button
                 type="button"
-                className="bg-blue-500 p-1 rounded-md text-black font-semibold"
+                bg="blue.500"
+                p={1}
+                rounded="md"
+                color="black"
+                fontWeight="semibold"
                 onClick={handleFormContent}
               >
                 Login
-              </button>
+              </Button>
             </>
           ) : (
             <>
               New User -{" "}
-              <button
+              <Button
                 type="button"
-                className="bg-blue-500 p-1 rounded-md text-black font-semibold"
+                bg="blue.500"
+                p={1}
+                rounded="md"
+                color="black"
+                fontWeight="semibold"
                 onClick={handleFormContent}
               >
                 SignUp
-              </button>
+              </Button>
             </>
           )}
         </p>
@@ -246,5 +287,6 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
     </div>
   );
 };
+
 
 export default AuthForm;

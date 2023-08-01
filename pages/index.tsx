@@ -34,7 +34,7 @@ const Tech: FC = () => {
     setName(e.target.value);
   };
   return (
-    <div className="bg-MAIN flex flex-col gap-8 p-4 w-screen  flex justify-center items-center">
+    <div className="bg-MAIN flex flex-col gap-8 p-4 w-screen  justify-center items-center">
       <div className="flex flex-col gap-16 items-center mt-52">
         <h1 className="text-white font-bold text-3xl">
           Welcome To{" "}

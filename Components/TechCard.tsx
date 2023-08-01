@@ -97,7 +97,6 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
         }
       } else {
         setIsLoading(false);
-        console.log(checkData);
       }
     } catch (err: any) {
       console.log(err.message);
@@ -107,7 +106,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
 
   return (
     <div
-      className="p-2 rounded-md flex flex-col gap-2 lg:w-96 border border-PRIMARY border-2 sm:w-full"
+      className="p-2 rounded-md flex flex-col gap-2 lg:w-96 border-PRIMARY border-2 sm:w-full"
       key={key}
     >
       <div className="flex justify-between items-center">
