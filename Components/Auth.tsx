@@ -158,7 +158,7 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
         <Stack spacing={4} w="full">
           <FormLabel
             htmlFor="username"
-            className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+            className="text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Username
           </FormLabel>
@@ -178,7 +178,7 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
 
           <FormLabel
             htmlFor="password"
-            className="relative text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+            className="relative text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Password
           </FormLabel>
@@ -210,7 +210,7 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
           <Stack spacing={4} w="full">
             <FormLabel
               htmlFor="email"
-              className="text-COMPONENT_BG font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+              className="text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
             >
               Email
             </FormLabel>

@@ -22,15 +22,17 @@ const FilterBar: FC<FilterBarProps> = ({
   return (
     <div className="bg-PRIMARY  w-5/6 mx-auto p-2 rounded-lg">
       <ul className="flex w-full gap-10">
-  
-        <li className="relative text-white font-bold cursor-pointer ">
+        <li className="relative  ">
           <span
-            className="hover:bg-white hover:text-PRIMARY transition-all duration-200  rounded-md px-1"
+            className="text-MAIN font-bold cursor-pointer  rounded-md px-1"
             onClick={handleSortDisplay}
           >
             Sort By
           </span>
-          <span className="text-PRIMARY bg-MAIN p-1 rounded-md font-bold cursor-auto">
+          <span
+            className="text-PRIMARY bg-MAIN p-1 rounded-md font-bold cursor-pointer"
+            onClick={handleSortDisplay}
+          >
             {loadingState ? "..." : sortType}
           </span>
           <SortMenu

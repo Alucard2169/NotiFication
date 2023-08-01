@@ -51,7 +51,7 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
       <div className="w-full sm:w-1/2">
         <section className="flex flex-col gap-4">
           <div className="flex gap-4 items-center">
-            <h1 className="text-3xl text-white bg-PRIMARY p-2 rounded-md w-fit font-bold">
+            <h1 className="text-3xl text-PRIMARY p-2 rounded-md w-fit font-bold">
               {name}
             </h1>{" "}
             <div className="flex gap-4 items-center">
@@ -77,15 +77,15 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
               )}
             </div>
           </div>
-          <span className="bg-COMPONENT_PRIMARY_BG p-2 rounded-md font-semibold w-fit text-MAIN">
+          <span className="bg-PRIMARY p-2 rounded-md font-semibold w-fit text-MAIN">
             {language}
           </span>
           <article className="text-lg text-white font-bold flex flex-col gap-2 bg-PRIMARY p-2 rounded-md w-fit">
-            <h2>Description:</h2>{" "}
-            <p className="text-MAIN font-semibold">{description}</p>
+            <h2 className="text-MAIN">Description:</h2>{" "}
+            <p className="text-PRIMARY bg-MAIN p-1 rounded-md font-semibold">{description}</p>
           </article>
           <article className="flex flex-col gap-2 bg-PRIMARY p-2 rounded-md w-full">
-            <h2 className="text-white font-bold font-bold text-lg">
+            <h2 className="text-MAIN font-bold text-lg">
               Keywords:
             </h2>
             <div className="flex gap-1 sm:gap-2 flex-wrap">
@@ -134,29 +134,29 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
             Releases:
           </h3>
           <li className="bg-PRIMARY w-full flex flex-col gap-2 p-1 rounded-md">
-            <p className="text-white font-semibold text-md">
+            <p className="text-MAIN font-semibold text-md">
               Latest Stable Release Number:{" "}
-              <span className="text-COMPONENT_BG py-1 px-2 bg-MAIN rounded-md">
+              <span className="text-PRIMARY py-1 px-2 bg-MAIN rounded-md">
                 {latest_stable_release_number}
               </span>
             </p>
-            <p className="text-white font-semibold text-md">
+            <p className="text-MAIN font-semibold text-md">
               Published At:{" "}
-              <span className="text-COMPONENT_BG py-1 px-2 bg-MAIN rounded-md">
+              <span className="text-PRIMARY py-1 px-2 bg-MAIN rounded-md">
                 {formattedDate(latest_stable_release_published_at)}
               </span>{" "}
             </p>
           </li>
           <li className="bg-PRIMARY w-full flex flex-col gap-2 p-1 rounded-md">
-            <p className="text-white font-semibold text-md">
+            <p className="text-MAIN font-semibold text-md">
               Latest Release Number:{" "}
-              <span className="text-COMPONENT_BG py-1 px-2 bg-MAIN rounded-md">
+              <span className="text-PRIMARY py-1 px-2 bg-MAIN rounded-md">
                 {latest_release_number}
               </span>
             </p>
-            <p className="text-white font-semibold text-md">
+            <p className="text-MAIN font-semibold text-md">
               Published At:{" "}
-              <span className="text-COMPONENT_BG py-1 px-2 bg-MAIN rounded-md">
+              <span className="text-PRIMARY py-1 px-2 bg-MAIN rounded-md">
                 {formattedDate(latest_release_published_at)}
               </span>{" "}
             </p>

@@ -121,7 +121,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
       key={key}
     >
       <div className="flex justify-between items-center">
-        <h1 className="bg-MAIN rounded-lg w-fit p-2 text-MAIN_TEXT font-semibold text-xl">
+        <h1 className=" rounded-lg w-fit p-2 text-PRIMARY font-semibold text-xl">
           {tech.name}
         </h1>
         {isLoading ? (
@@ -136,14 +136,14 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
         {data && (
           
           <AiFillBell
-            className="bg-MAIN p-1 text-3xl rounded-md text-COMPONENT_PRIMARY_BG cursor-pointer hover:text-white"
+            className="p-1 text-3xl rounded-md text-MAIN cursor-pointer hover:text-PRIMARY hover:bg-MAIN transition-all duration-200"
             onClick={handleSubscribe}
           />
         )}
       </div>
       <div className="bg-MAIN rounded-lg p-2 flex flex-col gap-4 h-full justify-between">
         <p className="text-white text-md font-semibold">{tech.description}</p>
-        <ul className="bg-COMPONENT_BG flex gap-4 p-2 rounded-md">
+        <ul className="bg-MAIN flex gap-4 p-2 rounded-md">
           <li>
             <a
               href={tech.repository_url}
@@ -151,7 +151,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <AiFillGithub className="text-blue-500 bg-MAIN p-1 rounded-md text-4xl" />
+              <AiFillGithub className="text-MAIN bg-PRIMARY p-1 rounded-md text-4xl" />
             </a>
           </li>
           <li>
@@ -161,7 +161,7 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FiGlobe className="text-blue-500 bg-MAIN p-1 rounded-md text-4xl" />
+              <FiGlobe className="text-PRIMARY bg-MAIN p-1 rounded-md text-4xl" />
             </a>
           </li>
           <li>
@@ -171,10 +171,10 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FiPackage className="text-blue-500 bg-MAIN p-1 rounded-md text-4xl" />
+              <FiPackage className="text-PRIMARY bg-MAIN p-1 rounded-md text-4xl" />
             </a>
           </li>
-          <li className="text-blue-500 bg-MAIN p-1 rounded-md flex gap-2 items-center">
+          <li className="text-MAIN bg-PRIMARY p-1 rounded-md flex gap-2 items-center">
             <FiStar className="text-2xl" />{" "}
             <span className="text-md text-COMPONENT_BG font-semibold">
               {addCommasToNumber(tech.stars)}

@@ -29,7 +29,7 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
   return (
     <nav className="w-screen py-2 px-4  md:px-8  flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
-        <li className={`${"custom-list"} transition-all duration-200`}>
+        <li className="font-bold text-lg py-2 px-4 rounded-md bg-MAIN text-PRIMARY hover:bg-PRIMARY hover:text-MAIN transition-all duration-200">
           <Link href="/">notify</Link>
         </li>
       </ul>
@@ -37,7 +37,7 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
       <ul className="flex gap-8 items-center">
         {!data && (
           <li
-            className="px-2 py-1  bg-COMPONENT_PRIMARY_BG text-MAIN font-semibold rounded-lg cursor-pointer"
+            className="px-2 py-1  bg-MAIN text-PRIMARY font-semibold rounded-lg cursor-pointer"
             onClick={() => setFormState(true)}
           >
             SignUp
@@ -48,7 +48,7 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
             className="px-2 py-1 font-semibold rounded-lg cursor-pointer"
             onClick={handleLogout}
           >
-            <Button colorScheme="orange" color="black">Logout</Button>
+            <Button bg="black" color="white">Logout</Button>
           </li>
         )}
         {data && (
@@ -59,6 +59,7 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
               width={50}
               height={70}
               src={pfp}
+          
             />
           </Link>
         )}
