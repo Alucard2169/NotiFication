@@ -64,7 +64,10 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
         if (checkData.subscribed) {
           setIsLoading(false);
           setDialogState(true);
-          setMessage(`Already subscribed to ${name}`);
+          setMessage({
+            status: "info",
+            description: `Already subscribed to ${name}`,
+          });
         } else {
           const response = await fetch("/api/subscribe", {
             method: "POST",
@@ -85,21 +88,29 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
           const responseData = await response.json();
 
           if (response.ok) {
-            console.log(responseData);
-            console.log("success");
             setDialogState(true);
-            setMessage(`Subscribed to ${name}`);
+            setMessage({
+              status: "success",
+              description: `Subscribed to ${name}`,
+            });
             setIsLoading(false);
           } else {
             setIsLoading(false);
             console.log("error");
+             setMessage({
+               status: "error",
+               description: `error`,
+             });
           }
         }
       } else {
         setIsLoading(false);
       }
     } catch (err: any) {
-      console.log(err.message);
+       setMessage({
+         status: "error",
+         description: `${err.message}`,
+       });
     }
   };
 

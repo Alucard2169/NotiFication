@@ -1,3 +1,4 @@
+import { DialogContext, DialogContextProps } from "@/context/DialogContext";
 import { UserContextProps, userContext } from "@/context/UserContext";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -19,6 +20,9 @@ interface UpdateProp {
 
 const Profile = () => {
   const userContextValue = useContext(userContext) as UserContextProps;
+   const { setMessage, setDialogState } = useContext(
+     DialogContext
+   ) as DialogContextProps;
   const { data } = userContextValue;
   const [projects, setProjects] = useState<ProjectProp[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -117,7 +121,11 @@ const Profile = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        setDialogState(true)
+         setMessage({
+           status: "success",
+           description: `Unsubscribed`,
+         });
         // Update the projects state by removing the unsubscribed project
         setProjects((prevProjects) => {
           if (prevProjects) {
@@ -134,7 +142,11 @@ const Profile = () => {
         console.log(data);
       }
     } catch (err: any) {
-      console.log(err);
+      setDialogState(true)
+      setMessage({
+        status: 'error',
+        description:err.message
+      })
     }
   };
 

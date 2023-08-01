@@ -1,17 +1,24 @@
-import React, {
-  createContext,
-  ReactNode,
-  useState,
-  SetStateAction,
+import {
   Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
   useEffect,
+  useState,
 } from "react";
+
+export interface MessageProps {
+  status: "info" | "warning" | "success" | "error" | "loading" | undefined; // Fix the type here
+  description: string; // Corrected spelling here
+}
+
+ 
 
 export interface DialogContextProps {
   dialogState: boolean;
   setDialogState: Dispatch<SetStateAction<boolean>>;
-  message: string | null;
-  setMessage: Dispatch<SetStateAction<string | null>>;
+  message: MessageProps | null; // Update type here
+  setMessage: Dispatch<SetStateAction<MessageProps | null>>; // Update type here
 }
 
 const DialogContext = createContext<DialogContextProps | null>(null);
@@ -23,7 +30,7 @@ interface DialogContextProviderProps {
 // DialogContextProvider component
 const DialogContextProvider = ({ children }: DialogContextProviderProps) => {
   const [dialogState, setDialogState] = useState<boolean>(false);
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<MessageProps | null>(null);
 
   const contextValue: DialogContextProps = {
     dialogState: dialogState,
@@ -48,3 +55,4 @@ const DialogContextProvider = ({ children }: DialogContextProviderProps) => {
 };
 
 export { DialogContext, DialogContextProvider };
+
