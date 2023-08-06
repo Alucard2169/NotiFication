@@ -58,7 +58,7 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
                 isLoading
                   ? "pointer-events-none opacity-50 cursor-not-allowed"
                   : "pointer-events-auto"
-              } absolute text-MAIN font-semibold text-3xl w-fit -bottom-12  sm:-bottom-8 left-0 right-0 mx-auto bg-COMPONENT_BG px-2 py-1 rounded-md`}
+              } absolute text-MAIN bg-PRIMARY font-semibold text-xl w-fit -bottom-12  sm:-bottom-8 left-0 right-0 mx-auto bg-COMPONENT_BG px-2 py-1 rounded-md`}
             >
               {isLoading ? "Loading" : "View More"}
             </button>

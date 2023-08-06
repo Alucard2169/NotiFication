@@ -62,7 +62,7 @@ const Technology: FC<TechnologyProps> = ({ techData }) => {
               )}
               {repository_url && (
                 <a href={repository_url} target="_blank">
-                  <AiFillGithub className="text-3xl text-COMPONENT_BG" />
+                  <AiFillGithub className="text-3xl text-PRIMARY" />
                 </a>
               )}
               {latest_download_url && (

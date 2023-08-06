@@ -44,7 +44,7 @@ const FilterBar: FC<FilterBarProps> = ({
         </li>
         <li className="ml-auto">
           {loadingState ? (
-            <span className=" text-white   font-semibold">loading...</span>
+            <span className=" text-MAIN   font-semibold">loading...</span>
           ) : null}
         </li>
       </ul>
