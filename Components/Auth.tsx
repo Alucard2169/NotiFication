@@ -158,13 +158,13 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
         <Stack spacing={4} w="full">
           <FormLabel
             htmlFor="username"
-            className="text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+            className="text-NEUTRAL font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Username
           </FormLabel>
           <Input
             type="text"
-            className="text-PRIMARY font-semibold text-xl"
+            className="text-NEUTRAL font-semibold text-xl"
             id="username"
             name="username"
             onChange={handleUsernameChange}
@@ -178,7 +178,7 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
 
           <FormLabel
             htmlFor="password"
-            className="relative text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+            className="relative text-NEUTRAL font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
           >
             Password
           </FormLabel>
@@ -191,7 +191,7 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
               onChange={handlePasswordChange}
               value={password}
               rounded="full"
-              className="text-PRIMARY font-semibold"
+              className="text-NEUTRAL font-semibold"
               pr="4.5rem"
               px={5}
               py={6}
@@ -210,14 +210,14 @@ const AuthForm: FC<AuthFormStateProps> = ({ state }) => {
           <Stack spacing={4} w="full">
             <FormLabel
               htmlFor="email"
-              className="text-PRIMARY font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
+              className="text-NEUTRAL font-semibold flex flex-col text-base bg-MAIN w-fit px-2 rounded-sm"
             >
               Email
             </FormLabel>
             
             <Input
               type="email"
-              className="text-PRIMARY font-semibold text-xl"
+              className="text-NEUTRAL font-semibold text-xl"
               id="email"
               name="email"
               onChange={handleEmailChange}

@@ -4,7 +4,7 @@ import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
 const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
   const [isAscending, setIsAscending] = useState(true);
-  const [visibleVersion, setVisibleVersions] = useState(6);
+  const [visibleVersion, setVisibleVersions] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
   };
 
   const handleViewLessVersions = (): void => {
-    setVisibleVersions(6);
+    setVisibleVersions(8);
   };
 
   const formattedDate = (dateString: string): string => {
@@ -48,40 +48,41 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
 
   return (
     <div className="relative w-full sm:w-1/2 bg-MAIN rounded-md p-4">
-      <div className="flex w-full justify-between items-center">
+      <div className="flex flex-col gap-4 sm:flex-row w-full justify-between items-center">
         <h3 className="text-white font-semibold text-2xl">
           Version{" "}
           <span className="text-COMPONENT_BG font-semibold text-lg">
             ({versions.length})
           </span>
         </h3>
-        <button onClick={toggleOrder} className="text-MAIN mt-4">
+        <input
+          type="text"
+          placeholder="Search version"
+          value={searchTerm}
+          onChange={handleSearch}
+          className=" bg-PRIMARY text-NEUTRAL font-normal px-2 py-1 rounded-md  placeholder:text-black-700 outline-none focus:outline-white"
+        />
+        <button onClick={toggleOrder} className="text-NEUTRAL">
           {isAscending ? (
-            <BiUpArrow className="text-COMPONENT_BG bg-PRIMARY p-1 rounded-md text-3xl" />
+            <BiUpArrow className="text-NEUTRAL bg-PRIMARY p-1 rounded-md text-3xl" />
           ) : (
-            <BiDownArrow className="text-COMPONENT_BG bg-PRIMARY p-1 rounded-md text-3xl" />
+            <BiDownArrow className="text-NEUTRAL bg-PRIMARY p-1 rounded-md text-3xl" />
           )}
         </button>
       </div>
-      <input
-        type="text"
-        placeholder="Search version"
-        value={searchTerm}
-        onChange={handleSearch}
-        className="absolute top-16 sm:top-20 right-4 bg-PRIMARY text-COMPONENT_BG font-semibold px-2 py-1 rounded-md mt-4 placeholder:text-black-700 outline-none focus:outline-white"
-      />
-      <div className="grid gap-2  mt-20 sm:mt-4">
+
+      <div className="grid gap-2 sm:grid-cols-2  mt-20 sm:mt-8">
         {truncatedVersions.map((version) => (
           <div
             key={version.number}
-            className="bg-MAIN border border-PRIMARY py-1 px-2 rounded-md w-full sm:w-1/2 flex flex-col gap-2"
+            className="bg-MAIN border border-PRIMARY py-1 px-2 rounded-md w-full sm:w-full flex flex-col gap-4"
           >
             <h5 className="text-white font-semibold text-md">
               {version.number}
             </h5>
-            <p className="text-MAIN bg-PRIMARY p-1 rounded-md font-bold text-sm">
+            <p className="text-NEUTRAL bg-PRIMARY p-1 rounded-md font-bold text-sm">
               Published At:{" "}
-              <span className="text-PRIMARY bg-MAIN p-1 rounded-md">
+              <span className="text-NEUTRAL bg-MAIN p-1 rounded-md">
                 {formattedDate(version.published_at)}
               </span>
             </p>
@@ -91,7 +92,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
       {visibleVersion < filteredVersions.length && (
         <button
           onClick={handleViewMoreVersions}
-          className="bg-PRIMARY p-2 mt-2  w-full sm:w-1/2 rounded-md text-MAIN font-semibold"
+          className="bg-PRIMARY p-2 mt-2  w-full sm:w-full rounded-md text-NEUTRAL font-semibold"
         >
           View More
         </button>
@@ -99,7 +100,7 @@ const VersionChart: React.FC<{ versions: Version[] }> = ({ versions }) => {
       {visibleVersion === filteredVersions.length && (
         <button
           onClick={handleViewLessVersions}
-          className="bg-PRIMARY p-2 mt-2 w-1/2 rounded-md text-MAIN font-semibold"
+          className="bg-PRIMARY p-2 mt-2 w-full rounded-md text-NEUTRAL font-semibold"
         >
           View Less
         </button>

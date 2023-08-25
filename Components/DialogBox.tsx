@@ -13,10 +13,11 @@ const DialogBox = () => {
   const { status, description } = message;
 
   return (
-    <Alert status={status}>
-      <AlertIcon />
-      <AlertDescription>{description}</AlertDescription>
-    </Alert>
+      <Alert status={status}>
+        <AlertIcon />
+        <AlertDescription>{description}</AlertDescription>
+      </Alert>
+  
   );
 };
 

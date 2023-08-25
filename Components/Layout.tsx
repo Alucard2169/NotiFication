@@ -47,9 +47,11 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       ) : (
         <>
           {dialogState && <DialogBox />}
+          <div className="w-screen h-screen flex justify-center">
             <AuthForm state={{ formState, setFormState }} />
             <Navbar stateProps={{ formState, setFormState }} />
-          {children}
+            {children}
+          </div>
         </>
       )}
     </div>

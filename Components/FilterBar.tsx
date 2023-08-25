@@ -24,13 +24,13 @@ const FilterBar: FC<FilterBarProps> = ({
       <ul className="flex w-full gap-10">
         <li className="relative  ">
           <span
-            className="text-MAIN font-bold cursor-pointer  rounded-md px-1"
+            className="text-NEUTRAL font-bold cursor-pointer  rounded-md px-1"
             onClick={handleSortDisplay}
           >
             Sort By
           </span>
           <span
-            className="text-PRIMARY bg-MAIN p-1 rounded-md font-bold cursor-pointer"
+            className="text-NEUTRAL bg-MAIN px-4 py-1 rounded-md font-bold cursor-pointer"
             onClick={handleSortDisplay}
           >
             {loadingState ? "..." : sortType}
@@ -44,7 +44,7 @@ const FilterBar: FC<FilterBarProps> = ({
         </li>
         <li className="ml-auto">
           {loadingState ? (
-            <span className=" text-MAIN   font-semibold">loading...</span>
+            <span className=" text-NEUTRAL   font-semibold">loading...</span>
           ) : null}
         </li>
       </ul>

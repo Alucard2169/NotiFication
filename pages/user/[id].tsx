@@ -151,12 +151,12 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-4 sm:p-8 flex flex-col sm:flex-row gap-8">
+    <div className="p-4 sm:p-8 sm:mt-16 w-full flex flex-col sm:flex-row gap-8">
       <section className="bg-PRIMARY flex flex-col gap-6 p-4 rounded-md h-fit">
-        <h1 className="text-PRIMARY bg-MAIN py-1 px-2 font-bold text-2xl rounded-md">
+        <h1 className="text-NEUTRAL bg-MAIN py-1 px-2 font-bold text-2xl rounded-md">
           {data?.username}
         </h1>
-        <h3 className="text-MAIN font-semibold text-xl">{data?.email}</h3>
+        <h3 className="text-NEUTRAL font-semibold text-xl">{data?.email}</h3>
       </section>
       <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
         <section className="bg-MAIN border border-PRIMARY p-1 sm:p-2 rounded-md w-full  sm:w-1/2">
@@ -168,24 +168,24 @@ const Profile = () => {
                   key={project.package_id}
                   className="flex flex-col gap-1 sm:gap-2 bg-MAIN border border-PRIMARY p-2 rounded-md"
                 >
-                  <h1 className="bg-PRIMARY p-1 rounded-md text-MAIN font-semibold  text-lg sm:text-xl">
+                  <h1 className="bg-PRIMARY p-1 rounded-md text-NEUTRAL font-semibold  text-lg sm:text-xl">
                     {project.project_name}
                   </h1>
                   <p className="text-white font-bold">
                     Platform:{" "}
-                    <span className="bg-PRIMARY text-MAIN p-1 rounded-md text-sm sm:text-xl ">
+                    <span className="bg-PRIMARY text-NEUTRAL p-1 rounded-md text-sm sm:text-xl ">
                       {project.platform}
                     </span>
                   </p>
                   <div className="flex justify-between mt-4">
                     <BiSolidBellOff
-                      className="bg-PRIMARY text-MAIN p-1 rounded-md text-3xl cursor-pointer"
+                      className="bg-PRIMARY text-NEUTRAL p-1 rounded-md text-3xl cursor-pointer"
                       onClick={() => handleUnsubscription(project.package_id)}
                     />
                     <Link
                       href={`/technology/${project.platform}/${project.project_name}`}
                     >
-                      <AiFillInfoCircle className="bg-PRIMARY text-MAIN p-1 rounded-md text-3xl" />
+                      <AiFillInfoCircle className="bg-PRIMARY text-NEUTRAL p-1 rounded-md text-3xl" />
                     </Link>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ const Profile = () => {
         </section>
         <section className="bg-PRIMARY p-2 rounded-md w-full sm:w-1/2 flex flex-col gap-8">
           <div className="flex justify-between items-center">
-            <h2 className="text-MAIN font-bold text-2xl">Updates</h2>
+            <h2 className="text-NEUTRAL font-bold text-2xl">Updates</h2>
           </div>
           {updates ? (
             <div className="grid gap-4 h-auto">
@@ -210,21 +210,21 @@ const Profile = () => {
                   key={i}
                   className="flex flex-col gap-1 sm:gap-2 bg-MAIN rounded-md p-1 sm:p-2"
                 >
-                  <p className=" text-PRIMARY p-1 rounded-md font-medium w-fit">
+                  <p className=" text-NEUTRAL p-1 rounded-md font-medium w-fit">
                     Package:{" "}
-                    <span className="bg-PRIMARY text-MAIN p-1 rounded-md text-lg font-semibold text-COMPONENT_PRIMARY_BG">
+                    <span className="bg-PRIMARY text-NEUTRAL p-1 rounded-md text-lg font-semibold text-COMPONENT_PRIMARY_BG">
                       {update.project_name}
                     </span>
                   </p>
-                  <p className="text-PRIMARY p-1 rounded-md font-medium w-fit">
+                  <p className="text-NEUTRAL p-1 rounded-md font-medium w-fit">
                     Version:{" "}
-                    <span className="bg-PRIMARY p-1 rounded-md text-sm font-semibold text-MAIN">
+                    <span className="bg-PRIMARY p-1 rounded-md text-sm font-semibold text-NEUTRAL">
                       {update.latest_version}
                     </span>
                   </p>
-                  <p className="text-PRIMARY p-1 rounded-md font-medium w-fit">
+                  <p className="text-NEUTRAL p-1 rounded-md font-medium w-fit">
                     Time:{" "}
-                    <span className="bg-PRIMARY p-1 rounded-md text-sm font-semibold text-MAIN">
+                    <span className="bg-PRIMARY p-1 rounded-md text-sm font-semibold text-NEUTRAL">
                       {update.time}
                     </span>{" "}
                     Days ago
@@ -233,7 +233,7 @@ const Profile = () => {
               ))}
             </div>
           ) : (
-            <p className="bg-MAIN p-2 rounded-md text-MAIN text-xl font-semibold">
+            <p className="bg-MAIN p-2 rounded-md text-NEUTRAL text-lg font-normal">
               {isUpdateLoading ? "Loading updates..." : "No updates available"}
             </p>
           )}

@@ -27,9 +27,9 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
   };
 
   return (
-    <nav className="w-screen py-2 px-4  md:px-8  flex justify-between items-center bg-PRIMARY">
+    <nav className="fixed z-50 w-screen py-2 px-2 md:px-8 flex justify-between items-center bg-PRIMARY">
       <ul className="flex gap-4 items-center">
-        <li className="font-bold text-lg py-2 px-4 rounded-md bg-MAIN text-PRIMARY hover:bg-PRIMARY hover:text-MAIN transition-all duration-200">
+        <li className="font-bold text-sm py-2 px-4 rounded-md bg-MAIN text-NEUTRAL hover:bg-PRIMARY hover:text-NEUTRAL transition-all duration-200">
           <Link href="/">notify</Link>
         </li>
       </ul>
@@ -37,7 +37,7 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
       <ul className="flex gap-8 items-center">
         {!data && (
           <li
-            className="px-2 py-1  bg-MAIN text-PRIMARY font-semibold rounded-lg cursor-pointer"
+            className="px-4 py-2 text-sm bg-MAIN text-NEUTRAL font-semibold rounded-lg cursor-pointer hover:bg-PRIMARY transition-all duration-200"
             onClick={() => setFormState(true)}
           >
             SignUp
@@ -48,7 +48,9 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
             className="px-2 py-1 font-semibold rounded-lg cursor-pointer"
             onClick={handleLogout}
           >
-            <Button bg="black" color="white">Logout</Button>
+            <Button bg="#121212" color="white">
+              Logout
+            </Button>
           </li>
         )}
         {data && (
@@ -59,7 +61,6 @@ const Navbar: FC<NavbarProps> = ({ stateProps }) => {
               width={50}
               height={70}
               src={pfp}
-          
             />
           </Link>
         )}

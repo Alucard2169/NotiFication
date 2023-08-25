@@ -13,7 +13,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
       <ul
         className={`${
           !sortDisplay ? "hidden" : null
-        } absolute bg-PRIMARY p-1 z-50 top-10 rounded-md w-56 pl-2 flex flex-col gap-4`}
+        } absolute bg-PRIMARY p-1 z-50 top-10 rounded-md w-56 pl-2 flex flex-col gap-2`}
       >
         <li
           onClick={() => {
@@ -21,7 +21,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Default')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL  font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Default
         </li>
@@ -31,7 +31,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Rank')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Rank
         </li>
@@ -41,7 +41,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Stars')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Stars
         </li>
@@ -51,7 +51,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Dependents Count')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Dependents Count
         </li>
@@ -61,7 +61,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Dependents Repo Count')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Dependents Repos Count
         </li>
@@ -71,7 +71,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Latest Release Published At')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Latest Release Published At
         </li>
@@ -81,7 +81,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Contributions Count')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Contributions Count
         </li>
@@ -91,7 +91,7 @@ const SortMenu: FC<SortMenuProps> = ({ sortDisplay, handleSort, handleSortDispla
             handleSortDisplay();
             handleSortType('Created At')
           }}
-          className="text-MAIN font-bold px-1 rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
+          className="text-NEUTRAL font-bold px-4 py-2 text-sm rounded-md hover:text-white hover:bg-MAIN transition-all duration-200"
         >
           Created At
         </li>
