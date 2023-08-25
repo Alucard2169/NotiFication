@@ -151,7 +151,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-4 sm:p-8 sm:mt-16 w-full flex flex-col sm:flex-row gap-8">
+    <div className="p-4 sm:p-8 mt-16 sm:mt-16 w-full flex flex-col sm:flex-row gap-8">
       <section className="bg-PRIMARY flex flex-col gap-6 p-4 rounded-md h-fit">
         <h1 className="text-NEUTRAL bg-MAIN py-1 px-2 font-bold text-2xl rounded-md">
           {data?.username}
