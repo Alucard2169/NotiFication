@@ -1,14 +1,12 @@
 import { UserContextProps, userContext } from "@/context/UserContext";
 import { useSubscribe } from "@/hooks/useSubscribe";
-import wait from "@/public/wait.gif";
 import { TechData } from "@/types/techInterface";
-import Image from "next/image";
 import Link from "next/link";
 import { FC, useContext } from "react";
 import { AiFillBell, AiFillGithub } from "react-icons/ai";
 import { BiLinkExternal } from 'react-icons/bi';
 import { FiGlobe, FiPackage, FiStar } from "react-icons/fi";
-
+import { LineWave } from "react-loader-spinner";
 
 interface TechProps {
   tech: TechData;
@@ -33,22 +31,32 @@ const TechCard: FC<TechProps> = ({ tech, key }) => {
           {tech.name}
         </h1>
         {isLoading ? (
-          <Image
-            src={wait}
-            width={40}
-            height={40}
-            alt="wait gif"
-            className="ml-auto mr-4 rounded-md"
-          />
+          <div className="!ml-auto">
+            <LineWave
+              height="50"
+              width="50"
+              color="#121212"
+              ariaLabel="line-wave"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              firstLineColor="#ffffff"
+              middleLineColor="#121212"
+              lastLineColor="#ffffff"
+            />
+          </div>
         ) : null}
-        {data && 
+        {data && (
           <AiFillBell
-            className="p-1 text-3xl rounded-md text-NEUTRAL ml-auto cursor-pointer hover:text-PRIMARY hover:bg-MAIN transition-all duration-200"
+            className="p-1 text-3xl  rounded-md text-NEUTRAL ml-auto cursor-pointer hover:text-PRIMARY hover:bg-MAIN transition-all duration-200"
             onClick={handleSubscribe}
           />
-        }
-        <Link href={`/technology/${tech.platform}/${tech.name}`} title="view details">
-          <BiLinkExternal className="text-NEUTRAL text-xl"/>
+        )}
+        <Link
+          href={`/technology/${tech.platform}/${tech.name}`}
+          title="view details"
+        >
+          <BiLinkExternal className="text-NEUTRAL text-xl" />
         </Link>
       </div>
       <div className="bg-MAIN rounded-lg p-2 flex flex-col gap-4 h-full justify-between">
