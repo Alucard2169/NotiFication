@@ -9,16 +9,18 @@ interface TechProps {
   name: string;
 }
 
-const SearchResult: FC<TechProps> = ({ techData, name }) => {
+const SearchResult: FC<{ techData: TechData[]; name: string }> = ({
+  techData,
+  name,
+}) => {
+
   const [data, setData] = useState<TechData[]>(techData);
-  const [, setShowAll] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [, setSortOption] = useState<string>('');
-  const [, setFIlterOptions] = useState<string>('');
+  const [sortOption, setSortOption] = useState<string>("");
+  const [filterOptions, setFIlterOptions] = useState<string>("");
 
- 
 
- const handleSortFunctionality = async (sortBy: string) => {
+  const handleSortFunctionality = async (sortBy: string) => {
     try {
       const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
       setIsLoading(true);
@@ -29,27 +31,26 @@ const SearchResult: FC<TechProps> = ({ techData, name }) => {
 
       setData(techData);
       setIsLoading(false);
-      setShowAll(true);
       setSortOption(sortBy); // Set the selected sorting option in state
     } catch (err) {
       console.log(err);
     }
-  
- };
+  };
 
   return (
     <div className="relative w-screen h-ch mt-16 sm:mt-20">
-      <FilterBar handleSort={handleSortFunctionality} handleFilter={setFIlterOptions} loadingState={isLoading} />
-      {data.length === 0 ? (
+      <FilterBar
+        handleSort={handleSortFunctionality}
+        handleFilter={setFIlterOptions}
+        loadingState={isLoading}
+      />
+      {data && data.length === 0 ? (
         <p className="text-center  p-8  text-COMPONENT_BG font-semibold text-3xl">
           No Data
         </p>
       ) : (
         <div className="relative grid lg:grid-cols-3  p-2 sm:p-8 gap-8 md:grid-cols-2 sm:grid-cols-1">
-          {data.map((tech, i) => (
-            <TechCard tech={tech} key={i} />
-          ))}
-          
+          {data && data.map((tech, i) => <TechCard tech={tech} key={i} />)}
         </div>
       )}
     </div>
@@ -66,7 +67,7 @@ export async function getServerSideProps(context: any) {
     const apiKey = process.env.NEXT_PUBLIC_LIB_API_KEY;
 
     const techResponse = await fetch(
-      `${apiBaseUrl}/search?q=${name}&api_key=${apiKey}`
+      `${apiBaseUrl}/search?q=${name}&api_key=${apiKey}&page=1&per_page=10`
     );
     const techData = await techResponse.json();
 
