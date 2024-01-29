@@ -1,0 +1,534 @@
+{
+  "licenses": [
+    {
+      "id": 1,
+      "name": "MIT"
+    },
+    {
+      "id": 2,
+      "name": "ISC"
+    },
+    {
+      "id": 3,
+      "name": "Apache-2.0"
+    },
+    {
+      "id": 4,
+      "name": "BSD-3-Clause"
+    },
+    {
+      "id": 5,
+      "name": "ICU"
+    },
+    {
+      "id": 6,
+      "name": "Other"
+    },
+    {
+      "id": 7,
+      "name": "GPL-3.0"
+    },
+    {
+      "id": 8,
+      "name": "CNRI-Python-GPL-Compatible"
+    },
+    {
+      "id": 9,
+      "name": "Unlicense"
+    },
+    {
+      "id": 10,
+      "name": "MPL-2.0"
+    },
+    {
+      "id": 11,
+      "name": "BSD-2-Clause"
+    },
+    {
+      "id": 12,
+      "name": "EPL-2.0"
+    },
+    {
+      "id": 13,
+      "name": "AGPL-3.0"
+    },
+    {
+      "id": 14,
+      "name": "LGPL-3.0"
+    },
+    {
+      "id": 15,
+      "name": "CC0-1.0"
+    },
+    {
+      "id": 16,
+      "name": "EUPL-1.2"
+    },
+    {
+      "id": 17,
+      "name": "LGPL-3.0-only"
+    },
+    {
+      "id": 18,
+      "name": "MIT-feh"
+    },
+    {
+      "id": 19,
+      "name": "WTFPL"
+    },
+    {
+      "id": 20,
+      "name": "GPL-2.0"
+    },
+    {
+      "id": 21,
+      "name": "CERN-OHL-P-2.0"
+    },
+    {
+      "id": 22,
+      "name": "GPL-2.0+"
+    },
+    {
+      "id": 23,
+      "name": "Aladdin"
+    },
+    {
+      "id": 24,
+      "name": "BSD-1-Clause"
+    },
+    {
+      "id": 25,
+      "name": "EUPL-1.1"
+    },
+    {
+      "id": 26,
+      "name": "GPL-3.0-only"
+    },
+    {
+      "id": 27,
+      "name": "OSL-3.0"
+    },
+    {
+      "id": 28,
+      "name": "0BSD"
+    },
+    {
+      "id": 29,
+      "name": "Hippocratic-2.1"
+    },
+    {
+      "id": 30,
+      "name": "CC-BY-4.0"
+    },
+    {
+      "id": 31,
+      "name": "EPL-1.0"
+    },
+    {
+      "id": 32,
+      "name": "GPL-3.0+"
+    },
+    {
+      "id": 33,
+      "name": "CC-BY-NC-SA-4.0"
+    },
+    {
+      "id": 34,
+      "name": "Vim"
+    },
+    {
+      "id": 35,
+      "name": "Sendmail"
+    },
+    {
+      "id": 36,
+      "name": "Zlib"
+    }
+  ],
+  
+  "languages": [
+    {
+      "id": 1,
+      "name": "JavaScript"
+    },
+    {
+      "id": 2,
+      "name": "TypeScript"
+    },
+    {
+      "id": 3,
+      "name": "Java"
+    },
+    {
+      "id": 4,
+      "name": "HTML"
+    },
+    {
+      "id": 5,
+      "name": "CSS"
+    },
+    {
+      "id": 6,
+      "name": "Objective-C"
+    },
+    {
+      "id": 7,
+      "name": "Scala"
+    },
+    {
+      "id": 8,
+      "name": "Kotlin"
+    },
+    {
+      "id": 9,
+      "name": "Go"
+    },
+    {
+      "id": 10,
+      "name": "PHP"
+    },
+    {
+      "id": 11,
+      "name": "SCSS"
+    },
+    {
+      "id": 12,
+      "name": "C++"
+    },
+    {
+      "id": 13,
+      "name": "Vue"
+    },
+    {
+      "id": 14,
+      "name": "CoffeeScript"
+    },
+    {
+      "id": 15,
+      "name": "Rust"
+    },
+    {
+      "id": 16,
+      "name": "Python"
+    },
+    {
+      "id": 17,
+      "name": "Clojure"
+    },
+    {
+      "id": 18,
+      "name": "F#"
+    },
+    {
+      "id": 19,
+      "name": "C#"
+    },
+    {
+      "id": 20,
+      "name": "Swift"
+    },
+    {
+      "id": 21,
+      "name": "Reason"
+    },
+    {
+      "id": 22,
+      "name": "Shell"
+    },
+    {
+      "id": 23,
+      "name": "OCaml"
+    },
+    {
+      "id": 24,
+      "name": "Less"
+    },
+    {
+      "id": 25,
+      "name": "Haxe"
+    },
+    {
+      "id": 26,
+      "name": "PureScript"
+    },
+    {
+      "id": 27,
+      "name": "Ruby"
+    },
+    {
+      "id": 28,
+      "name": "Pug"
+    },
+    {
+      "id": 29,
+      "name": "C"
+    },
+    {
+      "id": 30,
+      "name": "EJS"
+    },
+    {
+      "id": 31,
+      "name": "LiveScript"
+    },
+    {
+      "id": 32,
+      "name": "Dart"
+    },
+    {
+      "id": 33,
+      "name": "Zig"
+    },
+    {
+      "id": 34,
+      "name": "Makefile"
+    },
+    {
+      "id": 35,
+      "name": "Elixir"
+    },
+    {
+      "id": 36,
+      "name": "Handlebars"
+    }
+  ],
+  "keywords": [
+    {
+      "id": 1,
+      "name": "React"
+    },
+    {
+      "id": 2,
+      "name": "TypeScript"
+    },
+    {
+      "id": 3,
+      "name": "React Component"
+    },
+    {
+      "id": 4,
+      "name": "JavaScript"
+    },
+    {
+      "id": 5,
+      "name": "Component"
+    },
+    {
+      "id": 6,
+      "name": "ReactJS"
+    },
+    {
+      "id": 7,
+      "name": "Components"
+    },
+    {
+      "id": 8,
+      "name": "UI"
+    },
+    {
+      "id": 9,
+      "name": "React Native"
+    },
+    {
+      "id": 10,
+      "name": "Vue"
+    },
+    {
+      "id": 11,
+      "name": "Redux"
+    },
+    {
+      "id": 12,
+      "name": "Hooks"
+    },
+    {
+      "id": 13,
+      "name": "React Components"
+    },
+    {
+      "id": 14,
+      "name": "iOS"
+    },
+    {
+      "id": 15,
+      "name": "Webpack"
+    },
+    {
+      "id": 16,
+      "name": "Android"
+    },
+    {
+      "id": 17,
+      "name": "CSS"
+    },
+    {
+      "id": 18,
+      "name": "Web"
+    },
+    {
+      "id": 19,
+      "name": "Angular"
+    },
+    {
+      "id": 20,
+      "name": "Native"
+    },
+    {
+      "id": 21,
+      "name": "Frontend"
+    },
+    {
+      "id": 22,
+      "name": "Template"
+    },
+    {
+      "id": 23,
+      "name": "Framework"
+    },
+    {
+      "id": 24,
+      "name": "Design System"
+    },
+    {
+      "id": 25,
+      "name": "Create React App"
+    },
+    {
+      "id": 26,
+      "name": "Hacktoberfest"
+    },
+    {
+      "id": 27,
+      "name": "Node.js"
+    },
+    {
+      "id": 28,
+      "name": "UI Components"
+    },
+    {
+      "id": 29,
+      "name": "React Hooks"
+    },
+    {
+      "id": 30,
+      "name": "Next.js"
+    },
+    {
+      "id": 31,
+      "name": "Form"
+    },
+    {
+      "id": 32,
+      "name": "ESLint"
+    },
+    {
+      "id": 33,
+      "name": "Library"
+    },
+    {
+      "id": 34,
+      "name": "Mobile"
+    },
+    {
+      "id": 35,
+      "name": "Editor"
+    },
+    {
+      "id": 36,
+      "name": "NPM"
+    }
+  ],
+  "platforms": [
+    {
+      "id": 1,
+      "name": "NPM"
+    },
+    {
+      "id": 2,
+      "name": "Maven"
+    },
+    {
+      "id": 3,
+      "name": "Bower"
+    },
+    {
+      "id": 4,
+      "name": "NuGet"
+    },
+    {
+      "id": 5,
+      "name": "Packagist"
+    },
+    {
+      "id": 6,
+      "name": "Go"
+    },
+    {
+      "id": 7,
+      "name": "Pypi"
+    },
+    {
+      "id": 8,
+      "name": "Cargo"
+    },
+    {
+      "id": 9,
+      "name": "Clojars"
+    },
+    {
+      "id": 10,
+      "name": "Meteor"
+    },
+    {
+      "id": 11,
+      "name": "Haxelib"
+    },
+    {
+      "id": 12,
+      "name": "Rubygems"
+    },
+    {
+      "id": 13,
+      "name": "Pub"
+    },
+    {
+      "id": 14,
+      "name": "CocoaPods"
+    },
+    {
+      "id": 15,
+      "name": "Conda"
+    },
+    {
+      "id": 16,
+      "name": "CRAN"
+    },
+    {
+      "id": 17,
+      "name": "Hex"
+    },
+    {
+      "id": 18,
+      "name": "PureScript"
+    },
+    {
+      "id": 19,
+      "name": "Carthage"
+    },
+    {
+      "id": 20,
+      "name": "Homebrew"
+    },
+    {
+      "id": 21,
+      "name": "Nimble"
+    },
+    {
+      "id": 22,
+      "name": "Elm"
+    }
+  ]
+
+
+
+}
