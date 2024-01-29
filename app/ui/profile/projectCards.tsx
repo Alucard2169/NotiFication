@@ -20,16 +20,16 @@ const handleUnsubscription = async () => {
   return (
     <Card size="sm" height={"fit-content"} variant={"outline"} background="none">
       <CardHeader>
-        <h2 className="text-md sm:text-lg font-bold">{project_name}</h2>
+        <h2 className="text-md sm:text-lg font-bold text-white">{project_name}</h2>
       </CardHeader>
       <CardBody display="flex" flexDirection={"column"} gap={2}>
-        <p className="flex justify-between items-center text-sm sm:text-md">
+        <p className="flex justify-between items-center text-white text-sm sm:text-md">
           Platform
-          <span className="bg-MAIN_BG text-xs sm:text-md p-1 sm:p-2 rounded-md">
+          <span className="bg-MAIN_BG text-xs sm:text-md p-1 text-white sm:p-2 rounded-md">
             {platform}
           </span>
         </p>
-        <p className="text-xs sm:text-sm mt-4 sm:mt-0">
+        <p className="text-xs sm:text-sm mt-4 sm:mt-0 text-white">
           Subscribed At: <span className="text-yellow-500">{formatDate(create_at)}</span>
         </p>
         <Button

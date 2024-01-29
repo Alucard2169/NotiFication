@@ -4,8 +4,8 @@ const VCard = ({ name, version, days, platform }: { name: string; version: strin
     return (
       <Card size="sm">
         <CardHeader display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-          <Heading size="md">{name}</Heading>
-          <span className='bg-MAIN p-1 rounded-sm text-sm' >NPM</span>
+          <Heading size="md" textColor={"white"}>{name}</Heading>
+          <span className='bg-MAIN text-white p-1 rounded-sm text-sm' >NPM</span>
         </CardHeader>
         <CardBody>
           <Text textColor={"black"}>

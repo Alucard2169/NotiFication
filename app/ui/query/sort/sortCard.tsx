@@ -12,7 +12,7 @@ const SortCard = ({ head, data }: { head: string; data: SortDataParams[] }) => {
       <AccordionItem>
         <h2>
           <AccordionButton _expanded={{ bg: "lightgreen", color: "black" }}>
-            <Box as="span" flex="1" textAlign="left" fontWeight={"bold"}>
+            <Box as="span" flex="1" textAlign="left" fontWeight={"bold"} textColor="white">
               {head}
             </Box>
             <AccordionIcon />

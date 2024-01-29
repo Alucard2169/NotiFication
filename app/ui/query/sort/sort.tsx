@@ -15,7 +15,7 @@ const Sort = async () => {
 
     return (
       <div className="pt-4">
-        <Accordion allowToggle>
+        <Accordion allowToggle >
           <SortCard head="Licenses" data={licenses} />
           <SortCard head="Languages" data={languages} />
           <SortCard head="Keywords" data={keywords} />

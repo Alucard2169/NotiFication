@@ -7,7 +7,7 @@ const Page = () => {
   return (
     <main className="grid grid-cols-1 sm:grid-cols-[40%,60%] w-full">
       <div className="mt-16">
-        <h1 className="font-bold text-xl">Sort</h1>
+        <h1 className="font-bold text-xl text-white">Sort</h1>
         <Sort/>
       </div>
       <CardContainer />

@@ -1,10 +1,9 @@
 "use client"
 import { UserContext, UserContextProps } from "@/context/userContext";
-import { Button } from "@chakra-ui/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { FaGithub, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import InputBox from "../ui/inputBox";
 
@@ -98,15 +97,19 @@ const Page = () => {
     }
   };
 
-  const handleGithubLogin = async () => {
-    let { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
+  // const handleGithubLogin = async () => {
+  //   let { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "github",
+  //   });
+  //   console.log(data)
+  //   if (error) {
+  //     setError(error.message);
+  //   }
+  // };
 
-    if (error) {
-      setError(error.message);
-    }
-  };
+
+
+
     return (
       <div className="pt-4 flex justify-center items-center h-full">
         <div className="relative sm:w-2/5 w-full">
@@ -156,7 +159,7 @@ const Page = () => {
                 {isVisible ? <FaRegEyeSlash /> : <IoEyeOutline />}
               </button>
             </div>
-            <Button type="button" colorScheme="gray" leftIcon={<FaGithub/>} onClick={handleGithubLogin}>Github</Button>
+            {/* <Button type="button" colorScheme="gray" leftIcon={<FaGithub/>} onClick={handleGithubLogin}>Github</Button> */}
             <input
               type="submit"
               value="Sign in"
