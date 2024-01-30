@@ -228,7 +228,7 @@ export const fetchVersions = async () => {
               .from("packages")
               .update({
                 current_version: latestVersion,
-                last_date: latestDate.toISOString(), // Ensure it's in the correct format
+                last_date: latestDate.toISOString(), 
               })
               .eq("package_id", id);
 
