@@ -163,14 +163,15 @@ interface responseMessage {
   projectName: string;
   latestVersion: string;
   platform: string;
-  daysAgo: number;
+  daysAgo: string | null;
+  hoursAgo: string | null;
 }
 
 
 const LIBRARIES_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-const parseDateStringToDate = (date: string): Date => {
-  return new Date(date);
+const parseDateStringToDate = (dateString: string): Date => {
+  return new Date(dateString);
 };
 
 export const fetchVersions = async () => {
@@ -195,7 +196,7 @@ export const fetchVersions = async () => {
       .eq("user_id", user.id);
 
     if (error) {
-      throw error;
+      throw new Error(`Error fetching packages: ${error.message}`);
     }
 
     const packages = data.length === 0 ? null : data;
@@ -208,12 +209,7 @@ export const fetchVersions = async () => {
     const updateMessages: responseMessage[] = [];
 
     for (const project of subscribedProjects) {
-      const {
-        platform,
-        project_name,
-        id,
-        create_at,
-      } = project;
+      const { platform, project_name, id, create_at } = project;
       const url = `https://libraries.io/api/${platform}/${project_name}?api_key=${LIBRARIES_API_KEY}`;
 
       try {
@@ -222,28 +218,25 @@ export const fetchVersions = async () => {
         if (response.status === 200) {
           const projectInfo = await response.json();
           const latestVersion = projectInfo.latest_release_number;
-          const platform = projectInfo.platform;
-          const latestDate = projectInfo.latest_release_published_at;
-          const newDate = parseDateStringToDate(latestDate);
+          const latestDate = parseDateStringToDate(
+            projectInfo.latest_release_published_at
+          );
           const createdDate = parseDateStringToDate(create_at);
 
-          // Calculate the difference in months between the new and last dates
           if (latestDate > createdDate) {
-            // Update Supabase record
             await supabase
               .from("packages")
               .update({
                 current_version: latestVersion,
-                last_date: latestDate,
+                last_date: latestDate.toISOString(), // Ensure it's in the correct format
               })
               .eq("package_id", id);
 
             const updateMessage = createNotification(
               project_name,
               latestVersion,
-         
-              newDate,
-                   platform,
+              latestDate,
+              platform
             );
             updateMessages.unshift(updateMessage);
           }
@@ -252,7 +245,7 @@ export const fetchVersions = async () => {
             `Error retrieving project information for ${platform}/${project_name}: ${response.status}`
           );
         }
-      } catch (error: any) {
+      } catch (error : any) {
         console.error(
           `Error processing project ${platform}/${project_name}: ${error.message}`
         );
@@ -270,16 +263,30 @@ function createNotification(
   projectName: string,
   latestVersion: string,
   latestDate: Date,
-  platform: string,
+  platform: string
 ): responseMessage {
   const currentDate = new Date();
   const timeDifferenceInMillis = currentDate.getTime() - latestDate.getTime();
-  const daysAgo = Math.floor(timeDifferenceInMillis / (1000 * 60 * 60 * 24));
+  const days = Math.floor(timeDifferenceInMillis / (1000 * 60 * 60 * 24)); 
+  let daysAgo = Math.floor(timeDifferenceInMillis / (1000 * 60 * 60 * 24)) + " Days ago";
+
+  if (days < 1) {
+    // Calculate hours instead
+    const hoursAgo = Math.floor(timeDifferenceInMillis / (1000 * 60 * 60)) + " Hours ago";
+    return {
+      projectName,
+      latestVersion,
+      platform,
+      hoursAgo,
+      daysAgo: null,
+    };
+  }
 
   return {
     projectName,
     latestVersion,
     platform,
     daysAgo,
+    hoursAgo: null,
   };
 }

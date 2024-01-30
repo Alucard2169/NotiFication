@@ -44,7 +44,6 @@ const VersionContainer = () => {
     getUpdates()
   }
 
-  console.log(data)
 
   if (isLoading) {
     return (
@@ -77,7 +76,8 @@ const VersionContainer = () => {
                 packj: {
                   projectName: string;
                   latestVersion: string;
-                  daysAgo: number;
+                  daysAgo: string | null;
+                  hoursAgo: string | null;
                   platform: string;
                 },
                 i: number
@@ -87,12 +87,11 @@ const VersionContainer = () => {
                   name={packj.projectName}
                   version={packj.latestVersion}
                   days={packj.daysAgo}
+                  hours={packj.hoursAgo}
                   platform={packj.platform}
                 />
               )
             )}
-
-  
           </div>
         )}
         {data.messages.length === 0 && (
