@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import { VersionProps } from "./detailsContainer";
 import { formatDate } from "./releases";
+import { version } from "os";
 
 const VersionChart: React.FC<{ versions: VersionProps[] }> = ({ versions }) => {
   const [isAscending, setIsAscending] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filteredVersions, setFilteredVersions] = useState(versions);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+    const searchTerm = event.target.value.toLowerCase();
+    setSearchTerm(searchTerm); 
+    const newFilteredVersions = versions.filter((version) =>
+      version.number.toLowerCase().includes(searchTerm) 
+    );
+    setFilteredVersions(newFilteredVersions); 
   };
 
   const toggleOrder = () => {
@@ -26,7 +32,7 @@ const VersionChart: React.FC<{ versions: VersionProps[] }> = ({ versions }) => {
     );
   };
 
- const sortedVersions = sortVersions(versions, isAscending);
+ const sortedVersions = sortVersions(filteredVersions, isAscending);
   
   return (
     <div className="relative w-full bg-MAIN rounded-md sm:p-4">
@@ -34,14 +40,14 @@ const VersionChart: React.FC<{ versions: VersionProps[] }> = ({ versions }) => {
         <h3 className="text-white font-semibold text-xl sm:text-2xl">
           Version{" "}
           <span className="text-COMPONENT_BG font-semibold text-lg">
-            ({versions.length})
+            ({filteredVersions.length})
           </span>
         </h3>
         <input
           type="text"
           placeholder="Search version"
-          value={searchTerm}
           onChange={handleSearch}
+          value={searchTerm}
           className=" bg-MAIN text-NEUTRAL font-normal px-2 py-1 rounded-md  placeholder:text-black-700 outline-none focus:outline-white"
         />
         <button

@@ -31,6 +31,8 @@ import { CardContainerProps } from "./cardContainer";
 
 const StatsCard = ({ icon, content }: { content: string; icon: ReactNode }) => {
   
+
+
   return (
     <GridItem
       w="100%"
@@ -49,13 +51,21 @@ const StatsCard = ({ icon, content }: { content: string; icon: ReactNode }) => {
 };
 
 const CardButton = ({ icon, link,externalLink = null, content }: { icon: ReactElement; link: string | null, externalLink : string | null; content: string }) => {
-    return (
+    
+  const [loading,isLoading] = useState(false);
+
+
+  return (
       <Button
         w="100%"
         h="10"
         colorScheme="blue"
         borderRadius="10"
         leftIcon={icon}
+        onClick={() => {
+          isLoading(prev => !prev)
+        }}
+        isLoading={loading}
       >
         {link && (
           <Link href={link} className="h-4 text-MAIN font-bold">
@@ -65,7 +75,6 @@ const CardButton = ({ icon, link,externalLink = null, content }: { icon: ReactEl
         {externalLink && (
           <a
             href={externalLink}
-            target="_blank"
             className="h-4 text-MAIN font-bold"
           >
             {content}
